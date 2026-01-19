@@ -99,3 +99,36 @@
 2026-01-19 06:28:56,092 - Knowledge - INFO - [WEBSOCKET] Sent: Type=progress_update, Size: 240, Duration: 0ms
 2026-01-19 06:28:56,256 - Knowledge - INFO - Saving knowledge to Redis...
 2026-01-19 06:28:56,487 - Knowledge - INFO - Knowledge saved to Redis successfully
+2026-01-19 11:03:28,071 - Knowledge - INFO - Created shared MongoDB connection pool
+2026-01-19 11:03:28,377 - Knowledge - INFO - Starting Knowledge Graph processing with 20 threads
+2026-01-19 11:03:28,569 - Knowledge - INFO - Initial configuration: chunk_size=65536, max_cache_size=500
+2026-01-19 11:03:28,746 - Knowledge - INFO - Knowledge Graph concurrency configuration: workers=20, max_batch_size=10, max_concurrent_llm_calls=50
+2026-01-19 11:03:29,758 - Knowledge - INFO - 🔍 _load_persisted_knowledge called - checking for Redis optimization
+2026-01-19 11:03:29,911 - Knowledge - WARNING - ❌ load_from_redis method not found - Redis support not attached
+2026-01-19 11:03:30,097 - Knowledge - INFO - load persisted knowledge: begin
+2026-01-19 11:03:30,317 - Knowledge - INFO - Persisted knowledge files in /app/data/T0015/307441/b6190f8/opencart-modern-backend-fastapi-307441/.knowledge have been renamed to use .json
+2026-01-19 11:03:30,482 - Knowledge - INFO - Found code-base-name: https://github.com/kavia-common/opencart-modern-backend-fastapi-307441.git:kavia-main
+2026-01-19 11:03:30,693 - Knowledge - INFO - Found code_base: <app.utils.kg_build.knowledge.KnowledgeCodeBase object at 0x7fa62f0b0550>
+2026-01-19 11:03:30,929 - Knowledge - INFO - Found code-base-name: https://github.com/kavia-common/opencart-modern-backend-fastapi-307441.git:kavia-main
+2026-01-19 11:03:31,095 - Knowledge - INFO - Found code_base: <app.utils.kg_build.knowledge.KnowledgeCodeBase object at 0x7fa62f0b0550>
+2026-01-19 11:03:31,254 - Knowledge - INFO - persist ingested knowledge for /app/data/T0015/307441/b6190f8/opencart-modern-backend-fastapi-307441/README.md
+2026-01-19 11:03:31,541 - Knowledge - INFO - [MONGODB_OP] Completed: persist, Collection: file_info, Duration: 91ms
+2026-01-19 11:03:32,643 - Knowledge - INFO - [REDIS_OP] Completed: store_embedding, Key: README.md, Duration: 922ms
+2026-01-19 11:03:32,846 - Knowledge - INFO - persist search terms embedding for README.md
+2026-01-19 11:03:33,027 - Knowledge - INFO - process ingested knowledge for /app/data/T0015/307441/b6190f8/opencart-modern-backend-fastapi-307441/README.md
+2026-01-19 11:03:33,173 - Knowledge - INFO - Loaded 1 files from persisted knowledge
+2026-01-19 11:03:33,381 - Knowledge - INFO - load persisted knowledge: end
+2026-01-19 11:03:33,600 - Knowledge - INFO - Redis support added with prefix knowledge:b6190f8:
+2026-01-19 11:03:33,827 - Knowledge - INFO - Starting knowledge initialization for ID: bEL3xc-b6190f8
+2026-01-19 11:03:34,009 - Knowledge - INFO - 🔍 Checking Redis for build_id: b6190f8
+2026-01-19 11:03:34,163 - Knowledge - INFO - 🔍 Full session ID: bEL3xc-b6190f8
+2026-01-19 11:03:34,351 - Knowledge - INFO - 🔍 Redis prefix will be: knowledge:b6190f8:
+2026-01-19 11:03:34,539 - Knowledge - INFO - 🔍 Using attached load_from_redis() method
+2026-01-19 11:03:34,721 - Knowledge - INFO - 🔍 Attempting to load knowledge from Redis...
+2026-01-19 11:03:34,909 - Knowledge - INFO - 🔍 Using derived instance_id for Redis lookup: b6190f8
+2026-01-19 11:03:35,084 - Knowledge - INFO - ✅ Redis cache found! Loading knowledge...
+2026-01-19 11:03:35,260 - Knowledge - INFO - ✅ Successfully loaded from Redis: 1 files
+2026-01-19 11:03:35,415 - Knowledge - INFO - ✅ Redis load complete: 1 files in 0.88s
+2026-01-19 11:03:35,592 - Knowledge - INFO - ⚡ Total Redis path: 0.88s (vs ~300s from disk)
+2026-01-19 11:03:35,794 - Knowledge - INFO - Saving knowledge to Redis...
+2026-01-19 11:03:35,942 - Knowledge - INFO - Knowledge saved to Redis successfully
