@@ -2,10 +2,16 @@
 Database Configuration and Session Management
 SQLAlchemy setup for SQLite database
 """
+import os
+from pathlib import Path
 from sqlalchemy import create_engine
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
 from app.core.config import settings
+
+# Ensure data directory exists
+data_dir = Path("./data")
+data_dir.mkdir(parents=True, exist_ok=True)
 
 # Create SQLite engine
 engine = create_engine(
