@@ -34,7 +34,7 @@ def register_customer(
         HTTPException 400: If email already exists
     """
     service = CustomerService(db)
-    return service.register_customer(customer_data.dict())
+    return service.register_customer(customer_data.model_dump())
 
 
 # PUBLIC_INTERFACE

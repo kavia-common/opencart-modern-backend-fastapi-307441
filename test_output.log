@@ -1,0 +1,1300 @@
+============================= test session starts ==============================
+platform linux -- Python 3.12.3, pytest-7.4.3, pluggy-1.6.0 -- /home/kavia/workspace/code-generation/opencart-modern-backend-fastapi-307441/venv/bin/python3
+cachedir: .pytest_cache
+rootdir: /home/kavia/workspace/code-generation/opencart-modern-backend-fastapi-307441
+configfile: pytest.ini
+testpaths: tests
+plugins: asyncio-0.21.1, anyio-3.7.1
+asyncio: mode=Mode.AUTO
+collecting ... collected 46 items
+
+tests/test_auth.py::test_register_customer_success FAILED                [  2%]
+tests/test_auth.py::test_register_customer_duplicate_email ERROR         [  4%]
+tests/test_auth.py::test_register_customer_short_password PASSED         [  6%]
+tests/test_auth.py::test_login_success ERROR                             [  8%]
+tests/test_auth.py::test_login_invalid_email PASSED                      [ 10%]
+tests/test_auth.py::test_login_invalid_password ERROR                    [ 13%]
+tests/test_auth.py::test_register_customer_missing_fields PASSED         [ 15%]
+tests/test_cart.py::test_get_empty_cart ERROR                            [ 17%]
+tests/test_cart.py::test_add_to_cart_success ERROR                       [ 19%]
+tests/test_cart.py::test_add_to_cart_without_auth ERROR                  [ 21%]
+tests/test_cart.py::test_add_to_cart_invalid_product ERROR               [ 23%]
+tests/test_cart.py::test_add_to_cart_insufficient_stock ERROR            [ 26%]
+tests/test_cart.py::test_get_cart_with_items ERROR                       [ 28%]
+tests/test_cart.py::test_update_cart_item ERROR                          [ 30%]
+tests/test_cart.py::test_remove_cart_item ERROR                          [ 32%]
+tests/test_cart.py::test_add_same_product_twice_increments_quantity ERROR [ 34%]
+tests/test_cart_service.py::test_add_item_to_cart_success ERROR          [ 36%]
+tests/test_cart_service.py::test_add_item_invalid_product ERROR          [ 39%]
+tests/test_cart_service.py::test_add_item_insufficient_stock ERROR       [ 41%]
+tests/test_cart_service.py::test_add_same_item_twice_increments_quantity ERROR [ 43%]
+tests/test_cart_service.py::test_get_empty_cart ERROR                    [ 45%]
+tests/test_cart_service.py::test_get_cart_with_items ERROR               [ 47%]
+tests/test_cart_service.py::test_update_cart_item_quantity ERROR         [ 50%]
+tests/test_cart_service.py::test_remove_cart_item ERROR                  [ 52%]
+tests/test_cart_service.py::test_clear_cart ERROR                        [ 54%]
+tests/test_cart_service.py::test_cart_totals_calculation ERROR           [ 56%]
+tests/test_product_service.py::test_get_products_empty_database PASSED   [ 58%]
+tests/test_product_service.py::test_get_products_with_pagination ERROR   [ 60%]
+tests/test_product_service.py::test_get_products_filter_by_category ERROR [ 63%]
+tests/test_product_service.py::test_get_products_search ERROR            [ 65%]
+tests/test_product_service.py::test_get_products_sort_by_price_asc ERROR [ 67%]
+tests/test_product_service.py::test_get_products_sort_by_price_desc ERROR [ 69%]
+tests/test_product_service.py::test_get_product_detail_success ERROR     [ 71%]
+tests/test_product_service.py::test_get_product_detail_not_found PASSED  [ 73%]
+tests/test_product_service.py::test_get_product_detail_increments_views ERROR [ 76%]
+tests/test_products.py::test_list_products_empty PASSED                  [ 78%]
+tests/test_products.py::test_list_products_with_data ERROR               [ 80%]
+tests/test_products.py::test_list_products_second_page ERROR             [ 82%]
+tests/test_products.py::test_list_products_filter_by_category ERROR      [ 84%]
+tests/test_products.py::test_list_products_search ERROR                  [ 86%]
+tests/test_products.py::test_list_products_sort_by_price ERROR           [ 89%]
+tests/test_products.py::test_get_product_detail_success ERROR            [ 91%]
+tests/test_products.py::test_get_product_detail_not_found PASSED         [ 93%]
+tests/test_products.py::test_get_product_detail_increments_view_count ERROR [ 95%]
+tests/test_products.py::test_list_products_invalid_page ERROR            [ 97%]
+tests/test_products.py::test_list_products_large_limit ERROR             [100%]
+
+==================================== ERRORS ====================================
+___________ ERROR at setup of test_register_customer_duplicate_email ___________
+tests/conftest.py:81: in test_customer
+    password=get_password_hash("password123"),
+app/core/security.py:41: in get_password_hash
+    return pwd_context.hash(password)
+venv/lib/python3.12/site-packages/passlib/context.py:2258: in hash
+    return record.hash(secret, **kwds)
+venv/lib/python3.12/site-packages/passlib/utils/handlers.py:779: in hash
+    self.checksum = self._calc_checksum(secret)
+venv/lib/python3.12/site-packages/passlib/handlers/bcrypt.py:591: in _calc_checksum
+    self._stub_requires_backend()
+venv/lib/python3.12/site-packages/passlib/utils/handlers.py:2254: in _stub_requires_backend
+    cls.set_backend()
+venv/lib/python3.12/site-packages/passlib/utils/handlers.py:2156: in set_backend
+    return owner.set_backend(name, dryrun=dryrun)
+venv/lib/python3.12/site-packages/passlib/utils/handlers.py:2163: in set_backend
+    return cls.set_backend(name, dryrun=dryrun)
+venv/lib/python3.12/site-packages/passlib/utils/handlers.py:2188: in set_backend
+    cls._set_backend(name, dryrun)
+venv/lib/python3.12/site-packages/passlib/utils/handlers.py:2311: in _set_backend
+    super(SubclassBackendMixin, cls)._set_backend(name, dryrun)
+venv/lib/python3.12/site-packages/passlib/utils/handlers.py:2224: in _set_backend
+    ok = loader(**kwds)
+venv/lib/python3.12/site-packages/passlib/handlers/bcrypt.py:626: in _load_backend_mixin
+    return mixin_cls._finalize_backend_mixin(name, dryrun)
+venv/lib/python3.12/site-packages/passlib/handlers/bcrypt.py:421: in _finalize_backend_mixin
+    if detect_wrap_bug(IDENT_2A):
+venv/lib/python3.12/site-packages/passlib/handlers/bcrypt.py:380: in detect_wrap_bug
+    if verify(secret, bug_hash):
+venv/lib/python3.12/site-packages/passlib/utils/handlers.py:792: in verify
+    return consteq(self._calc_checksum(secret), chk)
+venv/lib/python3.12/site-packages/passlib/handlers/bcrypt.py:655: in _calc_checksum
+    hash = _bcrypt.hashpw(secret, config)
+E   ValueError: password cannot be longer than 72 bytes, truncate manually if necessary (e.g. my_password[:72])
+------------------------------ Captured log setup ------------------------------
+WARNING  passlib.handlers.bcrypt:bcrypt.py:622 (trapped) error reading bcrypt version
+Traceback (most recent call last):
+  File "/home/kavia/workspace/code-generation/opencart-modern-backend-fastapi-307441/venv/lib/python3.12/site-packages/passlib/handlers/bcrypt.py", line 620, in _load_backend_mixin
+    version = _bcrypt.__about__.__version__
+              ^^^^^^^^^^^^^^^^^
+AttributeError: module 'bcrypt' has no attribute '__about__'
+_____________________ ERROR at setup of test_login_success _____________________
+tests/conftest.py:81: in test_customer
+    password=get_password_hash("password123"),
+app/core/security.py:41: in get_password_hash
+    return pwd_context.hash(password)
+venv/lib/python3.12/site-packages/passlib/context.py:2258: in hash
+    return record.hash(secret, **kwds)
+venv/lib/python3.12/site-packages/passlib/utils/handlers.py:779: in hash
+    self.checksum = self._calc_checksum(secret)
+venv/lib/python3.12/site-packages/passlib/handlers/bcrypt.py:591: in _calc_checksum
+    self._stub_requires_backend()
+venv/lib/python3.12/site-packages/passlib/utils/handlers.py:2254: in _stub_requires_backend
+    cls.set_backend()
+venv/lib/python3.12/site-packages/passlib/utils/handlers.py:2156: in set_backend
+    return owner.set_backend(name, dryrun=dryrun)
+venv/lib/python3.12/site-packages/passlib/utils/handlers.py:2163: in set_backend
+    return cls.set_backend(name, dryrun=dryrun)
+venv/lib/python3.12/site-packages/passlib/utils/handlers.py:2188: in set_backend
+    cls._set_backend(name, dryrun)
+venv/lib/python3.12/site-packages/passlib/utils/handlers.py:2311: in _set_backend
+    super(SubclassBackendMixin, cls)._set_backend(name, dryrun)
+venv/lib/python3.12/site-packages/passlib/utils/handlers.py:2224: in _set_backend
+    ok = loader(**kwds)
+venv/lib/python3.12/site-packages/passlib/handlers/bcrypt.py:626: in _load_backend_mixin
+    return mixin_cls._finalize_backend_mixin(name, dryrun)
+venv/lib/python3.12/site-packages/passlib/handlers/bcrypt.py:421: in _finalize_backend_mixin
+    if detect_wrap_bug(IDENT_2A):
+venv/lib/python3.12/site-packages/passlib/handlers/bcrypt.py:380: in detect_wrap_bug
+    if verify(secret, bug_hash):
+venv/lib/python3.12/site-packages/passlib/utils/handlers.py:792: in verify
+    return consteq(self._calc_checksum(secret), chk)
+venv/lib/python3.12/site-packages/passlib/handlers/bcrypt.py:655: in _calc_checksum
+    hash = _bcrypt.hashpw(secret, config)
+E   ValueError: password cannot be longer than 72 bytes, truncate manually if necessary (e.g. my_password[:72])
+------------------------------ Captured log setup ------------------------------
+WARNING  passlib.handlers.bcrypt:bcrypt.py:622 (trapped) error reading bcrypt version
+Traceback (most recent call last):
+  File "/home/kavia/workspace/code-generation/opencart-modern-backend-fastapi-307441/venv/lib/python3.12/site-packages/passlib/handlers/bcrypt.py", line 620, in _load_backend_mixin
+    version = _bcrypt.__about__.__version__
+              ^^^^^^^^^^^^^^^^^
+AttributeError: module 'bcrypt' has no attribute '__about__'
+________________ ERROR at setup of test_login_invalid_password _________________
+tests/conftest.py:81: in test_customer
+    password=get_password_hash("password123"),
+app/core/security.py:41: in get_password_hash
+    return pwd_context.hash(password)
+venv/lib/python3.12/site-packages/passlib/context.py:2258: in hash
+    return record.hash(secret, **kwds)
+venv/lib/python3.12/site-packages/passlib/utils/handlers.py:779: in hash
+    self.checksum = self._calc_checksum(secret)
+venv/lib/python3.12/site-packages/passlib/handlers/bcrypt.py:591: in _calc_checksum
+    self._stub_requires_backend()
+venv/lib/python3.12/site-packages/passlib/utils/handlers.py:2254: in _stub_requires_backend
+    cls.set_backend()
+venv/lib/python3.12/site-packages/passlib/utils/handlers.py:2156: in set_backend
+    return owner.set_backend(name, dryrun=dryrun)
+venv/lib/python3.12/site-packages/passlib/utils/handlers.py:2163: in set_backend
+    return cls.set_backend(name, dryrun=dryrun)
+venv/lib/python3.12/site-packages/passlib/utils/handlers.py:2188: in set_backend
+    cls._set_backend(name, dryrun)
+venv/lib/python3.12/site-packages/passlib/utils/handlers.py:2311: in _set_backend
+    super(SubclassBackendMixin, cls)._set_backend(name, dryrun)
+venv/lib/python3.12/site-packages/passlib/utils/handlers.py:2224: in _set_backend
+    ok = loader(**kwds)
+venv/lib/python3.12/site-packages/passlib/handlers/bcrypt.py:626: in _load_backend_mixin
+    return mixin_cls._finalize_backend_mixin(name, dryrun)
+venv/lib/python3.12/site-packages/passlib/handlers/bcrypt.py:421: in _finalize_backend_mixin
+    if detect_wrap_bug(IDENT_2A):
+venv/lib/python3.12/site-packages/passlib/handlers/bcrypt.py:380: in detect_wrap_bug
+    if verify(secret, bug_hash):
+venv/lib/python3.12/site-packages/passlib/utils/handlers.py:792: in verify
+    return consteq(self._calc_checksum(secret), chk)
+venv/lib/python3.12/site-packages/passlib/handlers/bcrypt.py:655: in _calc_checksum
+    hash = _bcrypt.hashpw(secret, config)
+E   ValueError: password cannot be longer than 72 bytes, truncate manually if necessary (e.g. my_password[:72])
+------------------------------ Captured log setup ------------------------------
+WARNING  passlib.handlers.bcrypt:bcrypt.py:622 (trapped) error reading bcrypt version
+Traceback (most recent call last):
+  File "/home/kavia/workspace/code-generation/opencart-modern-backend-fastapi-307441/venv/lib/python3.12/site-packages/passlib/handlers/bcrypt.py", line 620, in _load_backend_mixin
+    version = _bcrypt.__about__.__version__
+              ^^^^^^^^^^^^^^^^^
+AttributeError: module 'bcrypt' has no attribute '__about__'
+____________________ ERROR at setup of test_get_empty_cart _____________________
+tests/conftest.py:81: in test_customer
+    password=get_password_hash("password123"),
+app/core/security.py:41: in get_password_hash
+    return pwd_context.hash(password)
+venv/lib/python3.12/site-packages/passlib/context.py:2258: in hash
+    return record.hash(secret, **kwds)
+venv/lib/python3.12/site-packages/passlib/utils/handlers.py:779: in hash
+    self.checksum = self._calc_checksum(secret)
+venv/lib/python3.12/site-packages/passlib/handlers/bcrypt.py:591: in _calc_checksum
+    self._stub_requires_backend()
+venv/lib/python3.12/site-packages/passlib/utils/handlers.py:2254: in _stub_requires_backend
+    cls.set_backend()
+venv/lib/python3.12/site-packages/passlib/utils/handlers.py:2156: in set_backend
+    return owner.set_backend(name, dryrun=dryrun)
+venv/lib/python3.12/site-packages/passlib/utils/handlers.py:2163: in set_backend
+    return cls.set_backend(name, dryrun=dryrun)
+venv/lib/python3.12/site-packages/passlib/utils/handlers.py:2188: in set_backend
+    cls._set_backend(name, dryrun)
+venv/lib/python3.12/site-packages/passlib/utils/handlers.py:2311: in _set_backend
+    super(SubclassBackendMixin, cls)._set_backend(name, dryrun)
+venv/lib/python3.12/site-packages/passlib/utils/handlers.py:2224: in _set_backend
+    ok = loader(**kwds)
+venv/lib/python3.12/site-packages/passlib/handlers/bcrypt.py:626: in _load_backend_mixin
+    return mixin_cls._finalize_backend_mixin(name, dryrun)
+venv/lib/python3.12/site-packages/passlib/handlers/bcrypt.py:421: in _finalize_backend_mixin
+    if detect_wrap_bug(IDENT_2A):
+venv/lib/python3.12/site-packages/passlib/handlers/bcrypt.py:380: in detect_wrap_bug
+    if verify(secret, bug_hash):
+venv/lib/python3.12/site-packages/passlib/utils/handlers.py:792: in verify
+    return consteq(self._calc_checksum(secret), chk)
+venv/lib/python3.12/site-packages/passlib/handlers/bcrypt.py:655: in _calc_checksum
+    hash = _bcrypt.hashpw(secret, config)
+E   ValueError: password cannot be longer than 72 bytes, truncate manually if necessary (e.g. my_password[:72])
+------------------------------ Captured log setup ------------------------------
+WARNING  passlib.handlers.bcrypt:bcrypt.py:622 (trapped) error reading bcrypt version
+Traceback (most recent call last):
+  File "/home/kavia/workspace/code-generation/opencart-modern-backend-fastapi-307441/venv/lib/python3.12/site-packages/passlib/handlers/bcrypt.py", line 620, in _load_backend_mixin
+    version = _bcrypt.__about__.__version__
+              ^^^^^^^^^^^^^^^^^
+AttributeError: module 'bcrypt' has no attribute '__about__'
+__________________ ERROR at setup of test_add_to_cart_success __________________
+tests/conftest.py:81: in test_customer
+    password=get_password_hash("password123"),
+app/core/security.py:41: in get_password_hash
+    return pwd_context.hash(password)
+venv/lib/python3.12/site-packages/passlib/context.py:2258: in hash
+    return record.hash(secret, **kwds)
+venv/lib/python3.12/site-packages/passlib/utils/handlers.py:779: in hash
+    self.checksum = self._calc_checksum(secret)
+venv/lib/python3.12/site-packages/passlib/handlers/bcrypt.py:591: in _calc_checksum
+    self._stub_requires_backend()
+venv/lib/python3.12/site-packages/passlib/utils/handlers.py:2254: in _stub_requires_backend
+    cls.set_backend()
+venv/lib/python3.12/site-packages/passlib/utils/handlers.py:2156: in set_backend
+    return owner.set_backend(name, dryrun=dryrun)
+venv/lib/python3.12/site-packages/passlib/utils/handlers.py:2163: in set_backend
+    return cls.set_backend(name, dryrun=dryrun)
+venv/lib/python3.12/site-packages/passlib/utils/handlers.py:2188: in set_backend
+    cls._set_backend(name, dryrun)
+venv/lib/python3.12/site-packages/passlib/utils/handlers.py:2311: in _set_backend
+    super(SubclassBackendMixin, cls)._set_backend(name, dryrun)
+venv/lib/python3.12/site-packages/passlib/utils/handlers.py:2224: in _set_backend
+    ok = loader(**kwds)
+venv/lib/python3.12/site-packages/passlib/handlers/bcrypt.py:626: in _load_backend_mixin
+    return mixin_cls._finalize_backend_mixin(name, dryrun)
+venv/lib/python3.12/site-packages/passlib/handlers/bcrypt.py:421: in _finalize_backend_mixin
+    if detect_wrap_bug(IDENT_2A):
+venv/lib/python3.12/site-packages/passlib/handlers/bcrypt.py:380: in detect_wrap_bug
+    if verify(secret, bug_hash):
+venv/lib/python3.12/site-packages/passlib/utils/handlers.py:792: in verify
+    return consteq(self._calc_checksum(secret), chk)
+venv/lib/python3.12/site-packages/passlib/handlers/bcrypt.py:655: in _calc_checksum
+    hash = _bcrypt.hashpw(secret, config)
+E   ValueError: password cannot be longer than 72 bytes, truncate manually if necessary (e.g. my_password[:72])
+------------------------------ Captured log setup ------------------------------
+WARNING  passlib.handlers.bcrypt:bcrypt.py:622 (trapped) error reading bcrypt version
+Traceback (most recent call last):
+  File "/home/kavia/workspace/code-generation/opencart-modern-backend-fastapi-307441/venv/lib/python3.12/site-packages/passlib/handlers/bcrypt.py", line 620, in _load_backend_mixin
+    version = _bcrypt.__about__.__version__
+              ^^^^^^^^^^^^^^^^^
+AttributeError: module 'bcrypt' has no attribute '__about__'
+_______________ ERROR at setup of test_add_to_cart_without_auth ________________
+tests/conftest.py:117: in test_category
+    category = Category(
+venv/lib/python3.12/site-packages/sqlalchemy/orm/state.py:566: in _initialize_instance
+    with util.safe_reraise():
+venv/lib/python3.12/site-packages/sqlalchemy/util/langhelpers.py:146: in __exit__
+    raise exc_value.with_traceback(exc_tb)
+venv/lib/python3.12/site-packages/sqlalchemy/orm/state.py:564: in _initialize_instance
+    manager.original_init(*mixed[1:], **kwargs)
+venv/lib/python3.12/site-packages/sqlalchemy/orm/decl_base.py:2142: in _declarative_constructor
+    raise TypeError(
+E   TypeError: 'column' is an invalid keyword argument for Category
+______________ ERROR at setup of test_add_to_cart_invalid_product ______________
+tests/conftest.py:81: in test_customer
+    password=get_password_hash("password123"),
+app/core/security.py:41: in get_password_hash
+    return pwd_context.hash(password)
+venv/lib/python3.12/site-packages/passlib/context.py:2258: in hash
+    return record.hash(secret, **kwds)
+venv/lib/python3.12/site-packages/passlib/utils/handlers.py:779: in hash
+    self.checksum = self._calc_checksum(secret)
+venv/lib/python3.12/site-packages/passlib/handlers/bcrypt.py:591: in _calc_checksum
+    self._stub_requires_backend()
+venv/lib/python3.12/site-packages/passlib/utils/handlers.py:2254: in _stub_requires_backend
+    cls.set_backend()
+venv/lib/python3.12/site-packages/passlib/utils/handlers.py:2156: in set_backend
+    return owner.set_backend(name, dryrun=dryrun)
+venv/lib/python3.12/site-packages/passlib/utils/handlers.py:2163: in set_backend
+    return cls.set_backend(name, dryrun=dryrun)
+venv/lib/python3.12/site-packages/passlib/utils/handlers.py:2188: in set_backend
+    cls._set_backend(name, dryrun)
+venv/lib/python3.12/site-packages/passlib/utils/handlers.py:2311: in _set_backend
+    super(SubclassBackendMixin, cls)._set_backend(name, dryrun)
+venv/lib/python3.12/site-packages/passlib/utils/handlers.py:2224: in _set_backend
+    ok = loader(**kwds)
+venv/lib/python3.12/site-packages/passlib/handlers/bcrypt.py:626: in _load_backend_mixin
+    return mixin_cls._finalize_backend_mixin(name, dryrun)
+venv/lib/python3.12/site-packages/passlib/handlers/bcrypt.py:421: in _finalize_backend_mixin
+    if detect_wrap_bug(IDENT_2A):
+venv/lib/python3.12/site-packages/passlib/handlers/bcrypt.py:380: in detect_wrap_bug
+    if verify(secret, bug_hash):
+venv/lib/python3.12/site-packages/passlib/utils/handlers.py:792: in verify
+    return consteq(self._calc_checksum(secret), chk)
+venv/lib/python3.12/site-packages/passlib/handlers/bcrypt.py:655: in _calc_checksum
+    hash = _bcrypt.hashpw(secret, config)
+E   ValueError: password cannot be longer than 72 bytes, truncate manually if necessary (e.g. my_password[:72])
+------------------------------ Captured log setup ------------------------------
+WARNING  passlib.handlers.bcrypt:bcrypt.py:622 (trapped) error reading bcrypt version
+Traceback (most recent call last):
+  File "/home/kavia/workspace/code-generation/opencart-modern-backend-fastapi-307441/venv/lib/python3.12/site-packages/passlib/handlers/bcrypt.py", line 620, in _load_backend_mixin
+    version = _bcrypt.__about__.__version__
+              ^^^^^^^^^^^^^^^^^
+AttributeError: module 'bcrypt' has no attribute '__about__'
+____________ ERROR at setup of test_add_to_cart_insufficient_stock _____________
+tests/conftest.py:81: in test_customer
+    password=get_password_hash("password123"),
+app/core/security.py:41: in get_password_hash
+    return pwd_context.hash(password)
+venv/lib/python3.12/site-packages/passlib/context.py:2258: in hash
+    return record.hash(secret, **kwds)
+venv/lib/python3.12/site-packages/passlib/utils/handlers.py:779: in hash
+    self.checksum = self._calc_checksum(secret)
+venv/lib/python3.12/site-packages/passlib/handlers/bcrypt.py:591: in _calc_checksum
+    self._stub_requires_backend()
+venv/lib/python3.12/site-packages/passlib/utils/handlers.py:2254: in _stub_requires_backend
+    cls.set_backend()
+venv/lib/python3.12/site-packages/passlib/utils/handlers.py:2156: in set_backend
+    return owner.set_backend(name, dryrun=dryrun)
+venv/lib/python3.12/site-packages/passlib/utils/handlers.py:2163: in set_backend
+    return cls.set_backend(name, dryrun=dryrun)
+venv/lib/python3.12/site-packages/passlib/utils/handlers.py:2188: in set_backend
+    cls._set_backend(name, dryrun)
+venv/lib/python3.12/site-packages/passlib/utils/handlers.py:2311: in _set_backend
+    super(SubclassBackendMixin, cls)._set_backend(name, dryrun)
+venv/lib/python3.12/site-packages/passlib/utils/handlers.py:2224: in _set_backend
+    ok = loader(**kwds)
+venv/lib/python3.12/site-packages/passlib/handlers/bcrypt.py:626: in _load_backend_mixin
+    return mixin_cls._finalize_backend_mixin(name, dryrun)
+venv/lib/python3.12/site-packages/passlib/handlers/bcrypt.py:421: in _finalize_backend_mixin
+    if detect_wrap_bug(IDENT_2A):
+venv/lib/python3.12/site-packages/passlib/handlers/bcrypt.py:380: in detect_wrap_bug
+    if verify(secret, bug_hash):
+venv/lib/python3.12/site-packages/passlib/utils/handlers.py:792: in verify
+    return consteq(self._calc_checksum(secret), chk)
+venv/lib/python3.12/site-packages/passlib/handlers/bcrypt.py:655: in _calc_checksum
+    hash = _bcrypt.hashpw(secret, config)
+E   ValueError: password cannot be longer than 72 bytes, truncate manually if necessary (e.g. my_password[:72])
+------------------------------ Captured log setup ------------------------------
+WARNING  passlib.handlers.bcrypt:bcrypt.py:622 (trapped) error reading bcrypt version
+Traceback (most recent call last):
+  File "/home/kavia/workspace/code-generation/opencart-modern-backend-fastapi-307441/venv/lib/python3.12/site-packages/passlib/handlers/bcrypt.py", line 620, in _load_backend_mixin
+    version = _bcrypt.__about__.__version__
+              ^^^^^^^^^^^^^^^^^
+AttributeError: module 'bcrypt' has no attribute '__about__'
+__________________ ERROR at setup of test_get_cart_with_items __________________
+tests/conftest.py:81: in test_customer
+    password=get_password_hash("password123"),
+app/core/security.py:41: in get_password_hash
+    return pwd_context.hash(password)
+venv/lib/python3.12/site-packages/passlib/context.py:2258: in hash
+    return record.hash(secret, **kwds)
+venv/lib/python3.12/site-packages/passlib/utils/handlers.py:779: in hash
+    self.checksum = self._calc_checksum(secret)
+venv/lib/python3.12/site-packages/passlib/handlers/bcrypt.py:591: in _calc_checksum
+    self._stub_requires_backend()
+venv/lib/python3.12/site-packages/passlib/utils/handlers.py:2254: in _stub_requires_backend
+    cls.set_backend()
+venv/lib/python3.12/site-packages/passlib/utils/handlers.py:2156: in set_backend
+    return owner.set_backend(name, dryrun=dryrun)
+venv/lib/python3.12/site-packages/passlib/utils/handlers.py:2163: in set_backend
+    return cls.set_backend(name, dryrun=dryrun)
+venv/lib/python3.12/site-packages/passlib/utils/handlers.py:2188: in set_backend
+    cls._set_backend(name, dryrun)
+venv/lib/python3.12/site-packages/passlib/utils/handlers.py:2311: in _set_backend
+    super(SubclassBackendMixin, cls)._set_backend(name, dryrun)
+venv/lib/python3.12/site-packages/passlib/utils/handlers.py:2224: in _set_backend
+    ok = loader(**kwds)
+venv/lib/python3.12/site-packages/passlib/handlers/bcrypt.py:626: in _load_backend_mixin
+    return mixin_cls._finalize_backend_mixin(name, dryrun)
+venv/lib/python3.12/site-packages/passlib/handlers/bcrypt.py:421: in _finalize_backend_mixin
+    if detect_wrap_bug(IDENT_2A):
+venv/lib/python3.12/site-packages/passlib/handlers/bcrypt.py:380: in detect_wrap_bug
+    if verify(secret, bug_hash):
+venv/lib/python3.12/site-packages/passlib/utils/handlers.py:792: in verify
+    return consteq(self._calc_checksum(secret), chk)
+venv/lib/python3.12/site-packages/passlib/handlers/bcrypt.py:655: in _calc_checksum
+    hash = _bcrypt.hashpw(secret, config)
+E   ValueError: password cannot be longer than 72 bytes, truncate manually if necessary (e.g. my_password[:72])
+------------------------------ Captured log setup ------------------------------
+WARNING  passlib.handlers.bcrypt:bcrypt.py:622 (trapped) error reading bcrypt version
+Traceback (most recent call last):
+  File "/home/kavia/workspace/code-generation/opencart-modern-backend-fastapi-307441/venv/lib/python3.12/site-packages/passlib/handlers/bcrypt.py", line 620, in _load_backend_mixin
+    version = _bcrypt.__about__.__version__
+              ^^^^^^^^^^^^^^^^^
+AttributeError: module 'bcrypt' has no attribute '__about__'
+___________________ ERROR at setup of test_update_cart_item ____________________
+tests/conftest.py:81: in test_customer
+    password=get_password_hash("password123"),
+app/core/security.py:41: in get_password_hash
+    return pwd_context.hash(password)
+venv/lib/python3.12/site-packages/passlib/context.py:2258: in hash
+    return record.hash(secret, **kwds)
+venv/lib/python3.12/site-packages/passlib/utils/handlers.py:779: in hash
+    self.checksum = self._calc_checksum(secret)
+venv/lib/python3.12/site-packages/passlib/handlers/bcrypt.py:591: in _calc_checksum
+    self._stub_requires_backend()
+venv/lib/python3.12/site-packages/passlib/utils/handlers.py:2254: in _stub_requires_backend
+    cls.set_backend()
+venv/lib/python3.12/site-packages/passlib/utils/handlers.py:2156: in set_backend
+    return owner.set_backend(name, dryrun=dryrun)
+venv/lib/python3.12/site-packages/passlib/utils/handlers.py:2163: in set_backend
+    return cls.set_backend(name, dryrun=dryrun)
+venv/lib/python3.12/site-packages/passlib/utils/handlers.py:2188: in set_backend
+    cls._set_backend(name, dryrun)
+venv/lib/python3.12/site-packages/passlib/utils/handlers.py:2311: in _set_backend
+    super(SubclassBackendMixin, cls)._set_backend(name, dryrun)
+venv/lib/python3.12/site-packages/passlib/utils/handlers.py:2224: in _set_backend
+    ok = loader(**kwds)
+venv/lib/python3.12/site-packages/passlib/handlers/bcrypt.py:626: in _load_backend_mixin
+    return mixin_cls._finalize_backend_mixin(name, dryrun)
+venv/lib/python3.12/site-packages/passlib/handlers/bcrypt.py:421: in _finalize_backend_mixin
+    if detect_wrap_bug(IDENT_2A):
+venv/lib/python3.12/site-packages/passlib/handlers/bcrypt.py:380: in detect_wrap_bug
+    if verify(secret, bug_hash):
+venv/lib/python3.12/site-packages/passlib/utils/handlers.py:792: in verify
+    return consteq(self._calc_checksum(secret), chk)
+venv/lib/python3.12/site-packages/passlib/handlers/bcrypt.py:655: in _calc_checksum
+    hash = _bcrypt.hashpw(secret, config)
+E   ValueError: password cannot be longer than 72 bytes, truncate manually if necessary (e.g. my_password[:72])
+------------------------------ Captured log setup ------------------------------
+WARNING  passlib.handlers.bcrypt:bcrypt.py:622 (trapped) error reading bcrypt version
+Traceback (most recent call last):
+  File "/home/kavia/workspace/code-generation/opencart-modern-backend-fastapi-307441/venv/lib/python3.12/site-packages/passlib/handlers/bcrypt.py", line 620, in _load_backend_mixin
+    version = _bcrypt.__about__.__version__
+              ^^^^^^^^^^^^^^^^^
+AttributeError: module 'bcrypt' has no attribute '__about__'
+___________________ ERROR at setup of test_remove_cart_item ____________________
+tests/conftest.py:81: in test_customer
+    password=get_password_hash("password123"),
+app/core/security.py:41: in get_password_hash
+    return pwd_context.hash(password)
+venv/lib/python3.12/site-packages/passlib/context.py:2258: in hash
+    return record.hash(secret, **kwds)
+venv/lib/python3.12/site-packages/passlib/utils/handlers.py:779: in hash
+    self.checksum = self._calc_checksum(secret)
+venv/lib/python3.12/site-packages/passlib/handlers/bcrypt.py:591: in _calc_checksum
+    self._stub_requires_backend()
+venv/lib/python3.12/site-packages/passlib/utils/handlers.py:2254: in _stub_requires_backend
+    cls.set_backend()
+venv/lib/python3.12/site-packages/passlib/utils/handlers.py:2156: in set_backend
+    return owner.set_backend(name, dryrun=dryrun)
+venv/lib/python3.12/site-packages/passlib/utils/handlers.py:2163: in set_backend
+    return cls.set_backend(name, dryrun=dryrun)
+venv/lib/python3.12/site-packages/passlib/utils/handlers.py:2188: in set_backend
+    cls._set_backend(name, dryrun)
+venv/lib/python3.12/site-packages/passlib/utils/handlers.py:2311: in _set_backend
+    super(SubclassBackendMixin, cls)._set_backend(name, dryrun)
+venv/lib/python3.12/site-packages/passlib/utils/handlers.py:2224: in _set_backend
+    ok = loader(**kwds)
+venv/lib/python3.12/site-packages/passlib/handlers/bcrypt.py:626: in _load_backend_mixin
+    return mixin_cls._finalize_backend_mixin(name, dryrun)
+venv/lib/python3.12/site-packages/passlib/handlers/bcrypt.py:421: in _finalize_backend_mixin
+    if detect_wrap_bug(IDENT_2A):
+venv/lib/python3.12/site-packages/passlib/handlers/bcrypt.py:380: in detect_wrap_bug
+    if verify(secret, bug_hash):
+venv/lib/python3.12/site-packages/passlib/utils/handlers.py:792: in verify
+    return consteq(self._calc_checksum(secret), chk)
+venv/lib/python3.12/site-packages/passlib/handlers/bcrypt.py:655: in _calc_checksum
+    hash = _bcrypt.hashpw(secret, config)
+E   ValueError: password cannot be longer than 72 bytes, truncate manually if necessary (e.g. my_password[:72])
+------------------------------ Captured log setup ------------------------------
+WARNING  passlib.handlers.bcrypt:bcrypt.py:622 (trapped) error reading bcrypt version
+Traceback (most recent call last):
+  File "/home/kavia/workspace/code-generation/opencart-modern-backend-fastapi-307441/venv/lib/python3.12/site-packages/passlib/handlers/bcrypt.py", line 620, in _load_backend_mixin
+    version = _bcrypt.__about__.__version__
+              ^^^^^^^^^^^^^^^^^
+AttributeError: module 'bcrypt' has no attribute '__about__'
+______ ERROR at setup of test_add_same_product_twice_increments_quantity _______
+tests/conftest.py:81: in test_customer
+    password=get_password_hash("password123"),
+app/core/security.py:41: in get_password_hash
+    return pwd_context.hash(password)
+venv/lib/python3.12/site-packages/passlib/context.py:2258: in hash
+    return record.hash(secret, **kwds)
+venv/lib/python3.12/site-packages/passlib/utils/handlers.py:779: in hash
+    self.checksum = self._calc_checksum(secret)
+venv/lib/python3.12/site-packages/passlib/handlers/bcrypt.py:591: in _calc_checksum
+    self._stub_requires_backend()
+venv/lib/python3.12/site-packages/passlib/utils/handlers.py:2254: in _stub_requires_backend
+    cls.set_backend()
+venv/lib/python3.12/site-packages/passlib/utils/handlers.py:2156: in set_backend
+    return owner.set_backend(name, dryrun=dryrun)
+venv/lib/python3.12/site-packages/passlib/utils/handlers.py:2163: in set_backend
+    return cls.set_backend(name, dryrun=dryrun)
+venv/lib/python3.12/site-packages/passlib/utils/handlers.py:2188: in set_backend
+    cls._set_backend(name, dryrun)
+venv/lib/python3.12/site-packages/passlib/utils/handlers.py:2311: in _set_backend
+    super(SubclassBackendMixin, cls)._set_backend(name, dryrun)
+venv/lib/python3.12/site-packages/passlib/utils/handlers.py:2224: in _set_backend
+    ok = loader(**kwds)
+venv/lib/python3.12/site-packages/passlib/handlers/bcrypt.py:626: in _load_backend_mixin
+    return mixin_cls._finalize_backend_mixin(name, dryrun)
+venv/lib/python3.12/site-packages/passlib/handlers/bcrypt.py:421: in _finalize_backend_mixin
+    if detect_wrap_bug(IDENT_2A):
+venv/lib/python3.12/site-packages/passlib/handlers/bcrypt.py:380: in detect_wrap_bug
+    if verify(secret, bug_hash):
+venv/lib/python3.12/site-packages/passlib/utils/handlers.py:792: in verify
+    return consteq(self._calc_checksum(secret), chk)
+venv/lib/python3.12/site-packages/passlib/handlers/bcrypt.py:655: in _calc_checksum
+    hash = _bcrypt.hashpw(secret, config)
+E   ValueError: password cannot be longer than 72 bytes, truncate manually if necessary (e.g. my_password[:72])
+------------------------------ Captured log setup ------------------------------
+WARNING  passlib.handlers.bcrypt:bcrypt.py:622 (trapped) error reading bcrypt version
+Traceback (most recent call last):
+  File "/home/kavia/workspace/code-generation/opencart-modern-backend-fastapi-307441/venv/lib/python3.12/site-packages/passlib/handlers/bcrypt.py", line 620, in _load_backend_mixin
+    version = _bcrypt.__about__.__version__
+              ^^^^^^^^^^^^^^^^^
+AttributeError: module 'bcrypt' has no attribute '__about__'
+_______________ ERROR at setup of test_add_item_to_cart_success ________________
+tests/conftest.py:81: in test_customer
+    password=get_password_hash("password123"),
+app/core/security.py:41: in get_password_hash
+    return pwd_context.hash(password)
+venv/lib/python3.12/site-packages/passlib/context.py:2258: in hash
+    return record.hash(secret, **kwds)
+venv/lib/python3.12/site-packages/passlib/utils/handlers.py:779: in hash
+    self.checksum = self._calc_checksum(secret)
+venv/lib/python3.12/site-packages/passlib/handlers/bcrypt.py:591: in _calc_checksum
+    self._stub_requires_backend()
+venv/lib/python3.12/site-packages/passlib/utils/handlers.py:2254: in _stub_requires_backend
+    cls.set_backend()
+venv/lib/python3.12/site-packages/passlib/utils/handlers.py:2156: in set_backend
+    return owner.set_backend(name, dryrun=dryrun)
+venv/lib/python3.12/site-packages/passlib/utils/handlers.py:2163: in set_backend
+    return cls.set_backend(name, dryrun=dryrun)
+venv/lib/python3.12/site-packages/passlib/utils/handlers.py:2188: in set_backend
+    cls._set_backend(name, dryrun)
+venv/lib/python3.12/site-packages/passlib/utils/handlers.py:2311: in _set_backend
+    super(SubclassBackendMixin, cls)._set_backend(name, dryrun)
+venv/lib/python3.12/site-packages/passlib/utils/handlers.py:2224: in _set_backend
+    ok = loader(**kwds)
+venv/lib/python3.12/site-packages/passlib/handlers/bcrypt.py:626: in _load_backend_mixin
+    return mixin_cls._finalize_backend_mixin(name, dryrun)
+venv/lib/python3.12/site-packages/passlib/handlers/bcrypt.py:421: in _finalize_backend_mixin
+    if detect_wrap_bug(IDENT_2A):
+venv/lib/python3.12/site-packages/passlib/handlers/bcrypt.py:380: in detect_wrap_bug
+    if verify(secret, bug_hash):
+venv/lib/python3.12/site-packages/passlib/utils/handlers.py:792: in verify
+    return consteq(self._calc_checksum(secret), chk)
+venv/lib/python3.12/site-packages/passlib/handlers/bcrypt.py:655: in _calc_checksum
+    hash = _bcrypt.hashpw(secret, config)
+E   ValueError: password cannot be longer than 72 bytes, truncate manually if necessary (e.g. my_password[:72])
+------------------------------ Captured log setup ------------------------------
+WARNING  passlib.handlers.bcrypt:bcrypt.py:622 (trapped) error reading bcrypt version
+Traceback (most recent call last):
+  File "/home/kavia/workspace/code-generation/opencart-modern-backend-fastapi-307441/venv/lib/python3.12/site-packages/passlib/handlers/bcrypt.py", line 620, in _load_backend_mixin
+    version = _bcrypt.__about__.__version__
+              ^^^^^^^^^^^^^^^^^
+AttributeError: module 'bcrypt' has no attribute '__about__'
+_______________ ERROR at setup of test_add_item_invalid_product ________________
+tests/conftest.py:81: in test_customer
+    password=get_password_hash("password123"),
+app/core/security.py:41: in get_password_hash
+    return pwd_context.hash(password)
+venv/lib/python3.12/site-packages/passlib/context.py:2258: in hash
+    return record.hash(secret, **kwds)
+venv/lib/python3.12/site-packages/passlib/utils/handlers.py:779: in hash
+    self.checksum = self._calc_checksum(secret)
+venv/lib/python3.12/site-packages/passlib/handlers/bcrypt.py:591: in _calc_checksum
+    self._stub_requires_backend()
+venv/lib/python3.12/site-packages/passlib/utils/handlers.py:2254: in _stub_requires_backend
+    cls.set_backend()
+venv/lib/python3.12/site-packages/passlib/utils/handlers.py:2156: in set_backend
+    return owner.set_backend(name, dryrun=dryrun)
+venv/lib/python3.12/site-packages/passlib/utils/handlers.py:2163: in set_backend
+    return cls.set_backend(name, dryrun=dryrun)
+venv/lib/python3.12/site-packages/passlib/utils/handlers.py:2188: in set_backend
+    cls._set_backend(name, dryrun)
+venv/lib/python3.12/site-packages/passlib/utils/handlers.py:2311: in _set_backend
+    super(SubclassBackendMixin, cls)._set_backend(name, dryrun)
+venv/lib/python3.12/site-packages/passlib/utils/handlers.py:2224: in _set_backend
+    ok = loader(**kwds)
+venv/lib/python3.12/site-packages/passlib/handlers/bcrypt.py:626: in _load_backend_mixin
+    return mixin_cls._finalize_backend_mixin(name, dryrun)
+venv/lib/python3.12/site-packages/passlib/handlers/bcrypt.py:421: in _finalize_backend_mixin
+    if detect_wrap_bug(IDENT_2A):
+venv/lib/python3.12/site-packages/passlib/handlers/bcrypt.py:380: in detect_wrap_bug
+    if verify(secret, bug_hash):
+venv/lib/python3.12/site-packages/passlib/utils/handlers.py:792: in verify
+    return consteq(self._calc_checksum(secret), chk)
+venv/lib/python3.12/site-packages/passlib/handlers/bcrypt.py:655: in _calc_checksum
+    hash = _bcrypt.hashpw(secret, config)
+E   ValueError: password cannot be longer than 72 bytes, truncate manually if necessary (e.g. my_password[:72])
+------------------------------ Captured log setup ------------------------------
+WARNING  passlib.handlers.bcrypt:bcrypt.py:622 (trapped) error reading bcrypt version
+Traceback (most recent call last):
+  File "/home/kavia/workspace/code-generation/opencart-modern-backend-fastapi-307441/venv/lib/python3.12/site-packages/passlib/handlers/bcrypt.py", line 620, in _load_backend_mixin
+    version = _bcrypt.__about__.__version__
+              ^^^^^^^^^^^^^^^^^
+AttributeError: module 'bcrypt' has no attribute '__about__'
+______________ ERROR at setup of test_add_item_insufficient_stock ______________
+tests/conftest.py:81: in test_customer
+    password=get_password_hash("password123"),
+app/core/security.py:41: in get_password_hash
+    return pwd_context.hash(password)
+venv/lib/python3.12/site-packages/passlib/context.py:2258: in hash
+    return record.hash(secret, **kwds)
+venv/lib/python3.12/site-packages/passlib/utils/handlers.py:779: in hash
+    self.checksum = self._calc_checksum(secret)
+venv/lib/python3.12/site-packages/passlib/handlers/bcrypt.py:591: in _calc_checksum
+    self._stub_requires_backend()
+venv/lib/python3.12/site-packages/passlib/utils/handlers.py:2254: in _stub_requires_backend
+    cls.set_backend()
+venv/lib/python3.12/site-packages/passlib/utils/handlers.py:2156: in set_backend
+    return owner.set_backend(name, dryrun=dryrun)
+venv/lib/python3.12/site-packages/passlib/utils/handlers.py:2163: in set_backend
+    return cls.set_backend(name, dryrun=dryrun)
+venv/lib/python3.12/site-packages/passlib/utils/handlers.py:2188: in set_backend
+    cls._set_backend(name, dryrun)
+venv/lib/python3.12/site-packages/passlib/utils/handlers.py:2311: in _set_backend
+    super(SubclassBackendMixin, cls)._set_backend(name, dryrun)
+venv/lib/python3.12/site-packages/passlib/utils/handlers.py:2224: in _set_backend
+    ok = loader(**kwds)
+venv/lib/python3.12/site-packages/passlib/handlers/bcrypt.py:626: in _load_backend_mixin
+    return mixin_cls._finalize_backend_mixin(name, dryrun)
+venv/lib/python3.12/site-packages/passlib/handlers/bcrypt.py:421: in _finalize_backend_mixin
+    if detect_wrap_bug(IDENT_2A):
+venv/lib/python3.12/site-packages/passlib/handlers/bcrypt.py:380: in detect_wrap_bug
+    if verify(secret, bug_hash):
+venv/lib/python3.12/site-packages/passlib/utils/handlers.py:792: in verify
+    return consteq(self._calc_checksum(secret), chk)
+venv/lib/python3.12/site-packages/passlib/handlers/bcrypt.py:655: in _calc_checksum
+    hash = _bcrypt.hashpw(secret, config)
+E   ValueError: password cannot be longer than 72 bytes, truncate manually if necessary (e.g. my_password[:72])
+------------------------------ Captured log setup ------------------------------
+WARNING  passlib.handlers.bcrypt:bcrypt.py:622 (trapped) error reading bcrypt version
+Traceback (most recent call last):
+  File "/home/kavia/workspace/code-generation/opencart-modern-backend-fastapi-307441/venv/lib/python3.12/site-packages/passlib/handlers/bcrypt.py", line 620, in _load_backend_mixin
+    version = _bcrypt.__about__.__version__
+              ^^^^^^^^^^^^^^^^^
+AttributeError: module 'bcrypt' has no attribute '__about__'
+________ ERROR at setup of test_add_same_item_twice_increments_quantity ________
+tests/conftest.py:81: in test_customer
+    password=get_password_hash("password123"),
+app/core/security.py:41: in get_password_hash
+    return pwd_context.hash(password)
+venv/lib/python3.12/site-packages/passlib/context.py:2258: in hash
+    return record.hash(secret, **kwds)
+venv/lib/python3.12/site-packages/passlib/utils/handlers.py:779: in hash
+    self.checksum = self._calc_checksum(secret)
+venv/lib/python3.12/site-packages/passlib/handlers/bcrypt.py:591: in _calc_checksum
+    self._stub_requires_backend()
+venv/lib/python3.12/site-packages/passlib/utils/handlers.py:2254: in _stub_requires_backend
+    cls.set_backend()
+venv/lib/python3.12/site-packages/passlib/utils/handlers.py:2156: in set_backend
+    return owner.set_backend(name, dryrun=dryrun)
+venv/lib/python3.12/site-packages/passlib/utils/handlers.py:2163: in set_backend
+    return cls.set_backend(name, dryrun=dryrun)
+venv/lib/python3.12/site-packages/passlib/utils/handlers.py:2188: in set_backend
+    cls._set_backend(name, dryrun)
+venv/lib/python3.12/site-packages/passlib/utils/handlers.py:2311: in _set_backend
+    super(SubclassBackendMixin, cls)._set_backend(name, dryrun)
+venv/lib/python3.12/site-packages/passlib/utils/handlers.py:2224: in _set_backend
+    ok = loader(**kwds)
+venv/lib/python3.12/site-packages/passlib/handlers/bcrypt.py:626: in _load_backend_mixin
+    return mixin_cls._finalize_backend_mixin(name, dryrun)
+venv/lib/python3.12/site-packages/passlib/handlers/bcrypt.py:421: in _finalize_backend_mixin
+    if detect_wrap_bug(IDENT_2A):
+venv/lib/python3.12/site-packages/passlib/handlers/bcrypt.py:380: in detect_wrap_bug
+    if verify(secret, bug_hash):
+venv/lib/python3.12/site-packages/passlib/utils/handlers.py:792: in verify
+    return consteq(self._calc_checksum(secret), chk)
+venv/lib/python3.12/site-packages/passlib/handlers/bcrypt.py:655: in _calc_checksum
+    hash = _bcrypt.hashpw(secret, config)
+E   ValueError: password cannot be longer than 72 bytes, truncate manually if necessary (e.g. my_password[:72])
+------------------------------ Captured log setup ------------------------------
+WARNING  passlib.handlers.bcrypt:bcrypt.py:622 (trapped) error reading bcrypt version
+Traceback (most recent call last):
+  File "/home/kavia/workspace/code-generation/opencart-modern-backend-fastapi-307441/venv/lib/python3.12/site-packages/passlib/handlers/bcrypt.py", line 620, in _load_backend_mixin
+    version = _bcrypt.__about__.__version__
+              ^^^^^^^^^^^^^^^^^
+AttributeError: module 'bcrypt' has no attribute '__about__'
+____________________ ERROR at setup of test_get_empty_cart _____________________
+tests/conftest.py:81: in test_customer
+    password=get_password_hash("password123"),
+app/core/security.py:41: in get_password_hash
+    return pwd_context.hash(password)
+venv/lib/python3.12/site-packages/passlib/context.py:2258: in hash
+    return record.hash(secret, **kwds)
+venv/lib/python3.12/site-packages/passlib/utils/handlers.py:779: in hash
+    self.checksum = self._calc_checksum(secret)
+venv/lib/python3.12/site-packages/passlib/handlers/bcrypt.py:591: in _calc_checksum
+    self._stub_requires_backend()
+venv/lib/python3.12/site-packages/passlib/utils/handlers.py:2254: in _stub_requires_backend
+    cls.set_backend()
+venv/lib/python3.12/site-packages/passlib/utils/handlers.py:2156: in set_backend
+    return owner.set_backend(name, dryrun=dryrun)
+venv/lib/python3.12/site-packages/passlib/utils/handlers.py:2163: in set_backend
+    return cls.set_backend(name, dryrun=dryrun)
+venv/lib/python3.12/site-packages/passlib/utils/handlers.py:2188: in set_backend
+    cls._set_backend(name, dryrun)
+venv/lib/python3.12/site-packages/passlib/utils/handlers.py:2311: in _set_backend
+    super(SubclassBackendMixin, cls)._set_backend(name, dryrun)
+venv/lib/python3.12/site-packages/passlib/utils/handlers.py:2224: in _set_backend
+    ok = loader(**kwds)
+venv/lib/python3.12/site-packages/passlib/handlers/bcrypt.py:626: in _load_backend_mixin
+    return mixin_cls._finalize_backend_mixin(name, dryrun)
+venv/lib/python3.12/site-packages/passlib/handlers/bcrypt.py:421: in _finalize_backend_mixin
+    if detect_wrap_bug(IDENT_2A):
+venv/lib/python3.12/site-packages/passlib/handlers/bcrypt.py:380: in detect_wrap_bug
+    if verify(secret, bug_hash):
+venv/lib/python3.12/site-packages/passlib/utils/handlers.py:792: in verify
+    return consteq(self._calc_checksum(secret), chk)
+venv/lib/python3.12/site-packages/passlib/handlers/bcrypt.py:655: in _calc_checksum
+    hash = _bcrypt.hashpw(secret, config)
+E   ValueError: password cannot be longer than 72 bytes, truncate manually if necessary (e.g. my_password[:72])
+------------------------------ Captured log setup ------------------------------
+WARNING  passlib.handlers.bcrypt:bcrypt.py:622 (trapped) error reading bcrypt version
+Traceback (most recent call last):
+  File "/home/kavia/workspace/code-generation/opencart-modern-backend-fastapi-307441/venv/lib/python3.12/site-packages/passlib/handlers/bcrypt.py", line 620, in _load_backend_mixin
+    version = _bcrypt.__about__.__version__
+              ^^^^^^^^^^^^^^^^^
+AttributeError: module 'bcrypt' has no attribute '__about__'
+__________________ ERROR at setup of test_get_cart_with_items __________________
+tests/conftest.py:81: in test_customer
+    password=get_password_hash("password123"),
+app/core/security.py:41: in get_password_hash
+    return pwd_context.hash(password)
+venv/lib/python3.12/site-packages/passlib/context.py:2258: in hash
+    return record.hash(secret, **kwds)
+venv/lib/python3.12/site-packages/passlib/utils/handlers.py:779: in hash
+    self.checksum = self._calc_checksum(secret)
+venv/lib/python3.12/site-packages/passlib/handlers/bcrypt.py:591: in _calc_checksum
+    self._stub_requires_backend()
+venv/lib/python3.12/site-packages/passlib/utils/handlers.py:2254: in _stub_requires_backend
+    cls.set_backend()
+venv/lib/python3.12/site-packages/passlib/utils/handlers.py:2156: in set_backend
+    return owner.set_backend(name, dryrun=dryrun)
+venv/lib/python3.12/site-packages/passlib/utils/handlers.py:2163: in set_backend
+    return cls.set_backend(name, dryrun=dryrun)
+venv/lib/python3.12/site-packages/passlib/utils/handlers.py:2188: in set_backend
+    cls._set_backend(name, dryrun)
+venv/lib/python3.12/site-packages/passlib/utils/handlers.py:2311: in _set_backend
+    super(SubclassBackendMixin, cls)._set_backend(name, dryrun)
+venv/lib/python3.12/site-packages/passlib/utils/handlers.py:2224: in _set_backend
+    ok = loader(**kwds)
+venv/lib/python3.12/site-packages/passlib/handlers/bcrypt.py:626: in _load_backend_mixin
+    return mixin_cls._finalize_backend_mixin(name, dryrun)
+venv/lib/python3.12/site-packages/passlib/handlers/bcrypt.py:421: in _finalize_backend_mixin
+    if detect_wrap_bug(IDENT_2A):
+venv/lib/python3.12/site-packages/passlib/handlers/bcrypt.py:380: in detect_wrap_bug
+    if verify(secret, bug_hash):
+venv/lib/python3.12/site-packages/passlib/utils/handlers.py:792: in verify
+    return consteq(self._calc_checksum(secret), chk)
+venv/lib/python3.12/site-packages/passlib/handlers/bcrypt.py:655: in _calc_checksum
+    hash = _bcrypt.hashpw(secret, config)
+E   ValueError: password cannot be longer than 72 bytes, truncate manually if necessary (e.g. my_password[:72])
+------------------------------ Captured log setup ------------------------------
+WARNING  passlib.handlers.bcrypt:bcrypt.py:622 (trapped) error reading bcrypt version
+Traceback (most recent call last):
+  File "/home/kavia/workspace/code-generation/opencart-modern-backend-fastapi-307441/venv/lib/python3.12/site-packages/passlib/handlers/bcrypt.py", line 620, in _load_backend_mixin
+    version = _bcrypt.__about__.__version__
+              ^^^^^^^^^^^^^^^^^
+AttributeError: module 'bcrypt' has no attribute '__about__'
+_______________ ERROR at setup of test_update_cart_item_quantity _______________
+tests/conftest.py:81: in test_customer
+    password=get_password_hash("password123"),
+app/core/security.py:41: in get_password_hash
+    return pwd_context.hash(password)
+venv/lib/python3.12/site-packages/passlib/context.py:2258: in hash
+    return record.hash(secret, **kwds)
+venv/lib/python3.12/site-packages/passlib/utils/handlers.py:779: in hash
+    self.checksum = self._calc_checksum(secret)
+venv/lib/python3.12/site-packages/passlib/handlers/bcrypt.py:591: in _calc_checksum
+    self._stub_requires_backend()
+venv/lib/python3.12/site-packages/passlib/utils/handlers.py:2254: in _stub_requires_backend
+    cls.set_backend()
+venv/lib/python3.12/site-packages/passlib/utils/handlers.py:2156: in set_backend
+    return owner.set_backend(name, dryrun=dryrun)
+venv/lib/python3.12/site-packages/passlib/utils/handlers.py:2163: in set_backend
+    return cls.set_backend(name, dryrun=dryrun)
+venv/lib/python3.12/site-packages/passlib/utils/handlers.py:2188: in set_backend
+    cls._set_backend(name, dryrun)
+venv/lib/python3.12/site-packages/passlib/utils/handlers.py:2311: in _set_backend
+    super(SubclassBackendMixin, cls)._set_backend(name, dryrun)
+venv/lib/python3.12/site-packages/passlib/utils/handlers.py:2224: in _set_backend
+    ok = loader(**kwds)
+venv/lib/python3.12/site-packages/passlib/handlers/bcrypt.py:626: in _load_backend_mixin
+    return mixin_cls._finalize_backend_mixin(name, dryrun)
+venv/lib/python3.12/site-packages/passlib/handlers/bcrypt.py:421: in _finalize_backend_mixin
+    if detect_wrap_bug(IDENT_2A):
+venv/lib/python3.12/site-packages/passlib/handlers/bcrypt.py:380: in detect_wrap_bug
+    if verify(secret, bug_hash):
+venv/lib/python3.12/site-packages/passlib/utils/handlers.py:792: in verify
+    return consteq(self._calc_checksum(secret), chk)
+venv/lib/python3.12/site-packages/passlib/handlers/bcrypt.py:655: in _calc_checksum
+    hash = _bcrypt.hashpw(secret, config)
+E   ValueError: password cannot be longer than 72 bytes, truncate manually if necessary (e.g. my_password[:72])
+------------------------------ Captured log setup ------------------------------
+WARNING  passlib.handlers.bcrypt:bcrypt.py:622 (trapped) error reading bcrypt version
+Traceback (most recent call last):
+  File "/home/kavia/workspace/code-generation/opencart-modern-backend-fastapi-307441/venv/lib/python3.12/site-packages/passlib/handlers/bcrypt.py", line 620, in _load_backend_mixin
+    version = _bcrypt.__about__.__version__
+              ^^^^^^^^^^^^^^^^^
+AttributeError: module 'bcrypt' has no attribute '__about__'
+___________________ ERROR at setup of test_remove_cart_item ____________________
+tests/conftest.py:81: in test_customer
+    password=get_password_hash("password123"),
+app/core/security.py:41: in get_password_hash
+    return pwd_context.hash(password)
+venv/lib/python3.12/site-packages/passlib/context.py:2258: in hash
+    return record.hash(secret, **kwds)
+venv/lib/python3.12/site-packages/passlib/utils/handlers.py:779: in hash
+    self.checksum = self._calc_checksum(secret)
+venv/lib/python3.12/site-packages/passlib/handlers/bcrypt.py:591: in _calc_checksum
+    self._stub_requires_backend()
+venv/lib/python3.12/site-packages/passlib/utils/handlers.py:2254: in _stub_requires_backend
+    cls.set_backend()
+venv/lib/python3.12/site-packages/passlib/utils/handlers.py:2156: in set_backend
+    return owner.set_backend(name, dryrun=dryrun)
+venv/lib/python3.12/site-packages/passlib/utils/handlers.py:2163: in set_backend
+    return cls.set_backend(name, dryrun=dryrun)
+venv/lib/python3.12/site-packages/passlib/utils/handlers.py:2188: in set_backend
+    cls._set_backend(name, dryrun)
+venv/lib/python3.12/site-packages/passlib/utils/handlers.py:2311: in _set_backend
+    super(SubclassBackendMixin, cls)._set_backend(name, dryrun)
+venv/lib/python3.12/site-packages/passlib/utils/handlers.py:2224: in _set_backend
+    ok = loader(**kwds)
+venv/lib/python3.12/site-packages/passlib/handlers/bcrypt.py:626: in _load_backend_mixin
+    return mixin_cls._finalize_backend_mixin(name, dryrun)
+venv/lib/python3.12/site-packages/passlib/handlers/bcrypt.py:421: in _finalize_backend_mixin
+    if detect_wrap_bug(IDENT_2A):
+venv/lib/python3.12/site-packages/passlib/handlers/bcrypt.py:380: in detect_wrap_bug
+    if verify(secret, bug_hash):
+venv/lib/python3.12/site-packages/passlib/utils/handlers.py:792: in verify
+    return consteq(self._calc_checksum(secret), chk)
+venv/lib/python3.12/site-packages/passlib/handlers/bcrypt.py:655: in _calc_checksum
+    hash = _bcrypt.hashpw(secret, config)
+E   ValueError: password cannot be longer than 72 bytes, truncate manually if necessary (e.g. my_password[:72])
+------------------------------ Captured log setup ------------------------------
+WARNING  passlib.handlers.bcrypt:bcrypt.py:622 (trapped) error reading bcrypt version
+Traceback (most recent call last):
+  File "/home/kavia/workspace/code-generation/opencart-modern-backend-fastapi-307441/venv/lib/python3.12/site-packages/passlib/handlers/bcrypt.py", line 620, in _load_backend_mixin
+    version = _bcrypt.__about__.__version__
+              ^^^^^^^^^^^^^^^^^
+AttributeError: module 'bcrypt' has no attribute '__about__'
+______________________ ERROR at setup of test_clear_cart _______________________
+tests/conftest.py:81: in test_customer
+    password=get_password_hash("password123"),
+app/core/security.py:41: in get_password_hash
+    return pwd_context.hash(password)
+venv/lib/python3.12/site-packages/passlib/context.py:2258: in hash
+    return record.hash(secret, **kwds)
+venv/lib/python3.12/site-packages/passlib/utils/handlers.py:779: in hash
+    self.checksum = self._calc_checksum(secret)
+venv/lib/python3.12/site-packages/passlib/handlers/bcrypt.py:591: in _calc_checksum
+    self._stub_requires_backend()
+venv/lib/python3.12/site-packages/passlib/utils/handlers.py:2254: in _stub_requires_backend
+    cls.set_backend()
+venv/lib/python3.12/site-packages/passlib/utils/handlers.py:2156: in set_backend
+    return owner.set_backend(name, dryrun=dryrun)
+venv/lib/python3.12/site-packages/passlib/utils/handlers.py:2163: in set_backend
+    return cls.set_backend(name, dryrun=dryrun)
+venv/lib/python3.12/site-packages/passlib/utils/handlers.py:2188: in set_backend
+    cls._set_backend(name, dryrun)
+venv/lib/python3.12/site-packages/passlib/utils/handlers.py:2311: in _set_backend
+    super(SubclassBackendMixin, cls)._set_backend(name, dryrun)
+venv/lib/python3.12/site-packages/passlib/utils/handlers.py:2224: in _set_backend
+    ok = loader(**kwds)
+venv/lib/python3.12/site-packages/passlib/handlers/bcrypt.py:626: in _load_backend_mixin
+    return mixin_cls._finalize_backend_mixin(name, dryrun)
+venv/lib/python3.12/site-packages/passlib/handlers/bcrypt.py:421: in _finalize_backend_mixin
+    if detect_wrap_bug(IDENT_2A):
+venv/lib/python3.12/site-packages/passlib/handlers/bcrypt.py:380: in detect_wrap_bug
+    if verify(secret, bug_hash):
+venv/lib/python3.12/site-packages/passlib/utils/handlers.py:792: in verify
+    return consteq(self._calc_checksum(secret), chk)
+venv/lib/python3.12/site-packages/passlib/handlers/bcrypt.py:655: in _calc_checksum
+    hash = _bcrypt.hashpw(secret, config)
+E   ValueError: password cannot be longer than 72 bytes, truncate manually if necessary (e.g. my_password[:72])
+------------------------------ Captured log setup ------------------------------
+WARNING  passlib.handlers.bcrypt:bcrypt.py:622 (trapped) error reading bcrypt version
+Traceback (most recent call last):
+  File "/home/kavia/workspace/code-generation/opencart-modern-backend-fastapi-307441/venv/lib/python3.12/site-packages/passlib/handlers/bcrypt.py", line 620, in _load_backend_mixin
+    version = _bcrypt.__about__.__version__
+              ^^^^^^^^^^^^^^^^^
+AttributeError: module 'bcrypt' has no attribute '__about__'
+________________ ERROR at setup of test_cart_totals_calculation ________________
+tests/conftest.py:81: in test_customer
+    password=get_password_hash("password123"),
+app/core/security.py:41: in get_password_hash
+    return pwd_context.hash(password)
+venv/lib/python3.12/site-packages/passlib/context.py:2258: in hash
+    return record.hash(secret, **kwds)
+venv/lib/python3.12/site-packages/passlib/utils/handlers.py:779: in hash
+    self.checksum = self._calc_checksum(secret)
+venv/lib/python3.12/site-packages/passlib/handlers/bcrypt.py:591: in _calc_checksum
+    self._stub_requires_backend()
+venv/lib/python3.12/site-packages/passlib/utils/handlers.py:2254: in _stub_requires_backend
+    cls.set_backend()
+venv/lib/python3.12/site-packages/passlib/utils/handlers.py:2156: in set_backend
+    return owner.set_backend(name, dryrun=dryrun)
+venv/lib/python3.12/site-packages/passlib/utils/handlers.py:2163: in set_backend
+    return cls.set_backend(name, dryrun=dryrun)
+venv/lib/python3.12/site-packages/passlib/utils/handlers.py:2188: in set_backend
+    cls._set_backend(name, dryrun)
+venv/lib/python3.12/site-packages/passlib/utils/handlers.py:2311: in _set_backend
+    super(SubclassBackendMixin, cls)._set_backend(name, dryrun)
+venv/lib/python3.12/site-packages/passlib/utils/handlers.py:2224: in _set_backend
+    ok = loader(**kwds)
+venv/lib/python3.12/site-packages/passlib/handlers/bcrypt.py:626: in _load_backend_mixin
+    return mixin_cls._finalize_backend_mixin(name, dryrun)
+venv/lib/python3.12/site-packages/passlib/handlers/bcrypt.py:421: in _finalize_backend_mixin
+    if detect_wrap_bug(IDENT_2A):
+venv/lib/python3.12/site-packages/passlib/handlers/bcrypt.py:380: in detect_wrap_bug
+    if verify(secret, bug_hash):
+venv/lib/python3.12/site-packages/passlib/utils/handlers.py:792: in verify
+    return consteq(self._calc_checksum(secret), chk)
+venv/lib/python3.12/site-packages/passlib/handlers/bcrypt.py:655: in _calc_checksum
+    hash = _bcrypt.hashpw(secret, config)
+E   ValueError: password cannot be longer than 72 bytes, truncate manually if necessary (e.g. my_password[:72])
+------------------------------ Captured log setup ------------------------------
+WARNING  passlib.handlers.bcrypt:bcrypt.py:622 (trapped) error reading bcrypt version
+Traceback (most recent call last):
+  File "/home/kavia/workspace/code-generation/opencart-modern-backend-fastapi-307441/venv/lib/python3.12/site-packages/passlib/handlers/bcrypt.py", line 620, in _load_backend_mixin
+    version = _bcrypt.__about__.__version__
+              ^^^^^^^^^^^^^^^^^
+AttributeError: module 'bcrypt' has no attribute '__about__'
+_____________ ERROR at setup of test_get_products_with_pagination ______________
+tests/conftest.py:117: in test_category
+    category = Category(
+venv/lib/python3.12/site-packages/sqlalchemy/orm/state.py:566: in _initialize_instance
+    with util.safe_reraise():
+venv/lib/python3.12/site-packages/sqlalchemy/util/langhelpers.py:146: in __exit__
+    raise exc_value.with_traceback(exc_tb)
+venv/lib/python3.12/site-packages/sqlalchemy/orm/state.py:564: in _initialize_instance
+    manager.original_init(*mixed[1:], **kwargs)
+venv/lib/python3.12/site-packages/sqlalchemy/orm/decl_base.py:2142: in _declarative_constructor
+    raise TypeError(
+E   TypeError: 'column' is an invalid keyword argument for Category
+____________ ERROR at setup of test_get_products_filter_by_category ____________
+tests/conftest.py:117: in test_category
+    category = Category(
+venv/lib/python3.12/site-packages/sqlalchemy/orm/state.py:566: in _initialize_instance
+    with util.safe_reraise():
+venv/lib/python3.12/site-packages/sqlalchemy/util/langhelpers.py:146: in __exit__
+    raise exc_value.with_traceback(exc_tb)
+venv/lib/python3.12/site-packages/sqlalchemy/orm/state.py:564: in _initialize_instance
+    manager.original_init(*mixed[1:], **kwargs)
+venv/lib/python3.12/site-packages/sqlalchemy/orm/decl_base.py:2142: in _declarative_constructor
+    raise TypeError(
+E   TypeError: 'column' is an invalid keyword argument for Category
+__________________ ERROR at setup of test_get_products_search __________________
+tests/conftest.py:117: in test_category
+    category = Category(
+venv/lib/python3.12/site-packages/sqlalchemy/orm/state.py:566: in _initialize_instance
+    with util.safe_reraise():
+venv/lib/python3.12/site-packages/sqlalchemy/util/langhelpers.py:146: in __exit__
+    raise exc_value.with_traceback(exc_tb)
+venv/lib/python3.12/site-packages/sqlalchemy/orm/state.py:564: in _initialize_instance
+    manager.original_init(*mixed[1:], **kwargs)
+venv/lib/python3.12/site-packages/sqlalchemy/orm/decl_base.py:2142: in _declarative_constructor
+    raise TypeError(
+E   TypeError: 'column' is an invalid keyword argument for Category
+____________ ERROR at setup of test_get_products_sort_by_price_asc _____________
+tests/conftest.py:117: in test_category
+    category = Category(
+venv/lib/python3.12/site-packages/sqlalchemy/orm/state.py:566: in _initialize_instance
+    with util.safe_reraise():
+venv/lib/python3.12/site-packages/sqlalchemy/util/langhelpers.py:146: in __exit__
+    raise exc_value.with_traceback(exc_tb)
+venv/lib/python3.12/site-packages/sqlalchemy/orm/state.py:564: in _initialize_instance
+    manager.original_init(*mixed[1:], **kwargs)
+venv/lib/python3.12/site-packages/sqlalchemy/orm/decl_base.py:2142: in _declarative_constructor
+    raise TypeError(
+E   TypeError: 'column' is an invalid keyword argument for Category
+____________ ERROR at setup of test_get_products_sort_by_price_desc ____________
+tests/conftest.py:117: in test_category
+    category = Category(
+venv/lib/python3.12/site-packages/sqlalchemy/orm/state.py:566: in _initialize_instance
+    with util.safe_reraise():
+venv/lib/python3.12/site-packages/sqlalchemy/util/langhelpers.py:146: in __exit__
+    raise exc_value.with_traceback(exc_tb)
+venv/lib/python3.12/site-packages/sqlalchemy/orm/state.py:564: in _initialize_instance
+    manager.original_init(*mixed[1:], **kwargs)
+venv/lib/python3.12/site-packages/sqlalchemy/orm/decl_base.py:2142: in _declarative_constructor
+    raise TypeError(
+E   TypeError: 'column' is an invalid keyword argument for Category
+______________ ERROR at setup of test_get_product_detail_success _______________
+tests/conftest.py:117: in test_category
+    category = Category(
+venv/lib/python3.12/site-packages/sqlalchemy/orm/state.py:566: in _initialize_instance
+    with util.safe_reraise():
+venv/lib/python3.12/site-packages/sqlalchemy/util/langhelpers.py:146: in __exit__
+    raise exc_value.with_traceback(exc_tb)
+venv/lib/python3.12/site-packages/sqlalchemy/orm/state.py:564: in _initialize_instance
+    manager.original_init(*mixed[1:], **kwargs)
+venv/lib/python3.12/site-packages/sqlalchemy/orm/decl_base.py:2142: in _declarative_constructor
+    raise TypeError(
+E   TypeError: 'column' is an invalid keyword argument for Category
+__________ ERROR at setup of test_get_product_detail_increments_views __________
+tests/conftest.py:117: in test_category
+    category = Category(
+venv/lib/python3.12/site-packages/sqlalchemy/orm/state.py:566: in _initialize_instance
+    with util.safe_reraise():
+venv/lib/python3.12/site-packages/sqlalchemy/util/langhelpers.py:146: in __exit__
+    raise exc_value.with_traceback(exc_tb)
+venv/lib/python3.12/site-packages/sqlalchemy/orm/state.py:564: in _initialize_instance
+    manager.original_init(*mixed[1:], **kwargs)
+venv/lib/python3.12/site-packages/sqlalchemy/orm/decl_base.py:2142: in _declarative_constructor
+    raise TypeError(
+E   TypeError: 'column' is an invalid keyword argument for Category
+________________ ERROR at setup of test_list_products_with_data ________________
+tests/conftest.py:117: in test_category
+    category = Category(
+venv/lib/python3.12/site-packages/sqlalchemy/orm/state.py:566: in _initialize_instance
+    with util.safe_reraise():
+venv/lib/python3.12/site-packages/sqlalchemy/util/langhelpers.py:146: in __exit__
+    raise exc_value.with_traceback(exc_tb)
+venv/lib/python3.12/site-packages/sqlalchemy/orm/state.py:564: in _initialize_instance
+    manager.original_init(*mixed[1:], **kwargs)
+venv/lib/python3.12/site-packages/sqlalchemy/orm/decl_base.py:2142: in _declarative_constructor
+    raise TypeError(
+E   TypeError: 'column' is an invalid keyword argument for Category
+_______________ ERROR at setup of test_list_products_second_page _______________
+tests/conftest.py:117: in test_category
+    category = Category(
+venv/lib/python3.12/site-packages/sqlalchemy/orm/state.py:566: in _initialize_instance
+    with util.safe_reraise():
+venv/lib/python3.12/site-packages/sqlalchemy/util/langhelpers.py:146: in __exit__
+    raise exc_value.with_traceback(exc_tb)
+venv/lib/python3.12/site-packages/sqlalchemy/orm/state.py:564: in _initialize_instance
+    manager.original_init(*mixed[1:], **kwargs)
+venv/lib/python3.12/site-packages/sqlalchemy/orm/decl_base.py:2142: in _declarative_constructor
+    raise TypeError(
+E   TypeError: 'column' is an invalid keyword argument for Category
+___________ ERROR at setup of test_list_products_filter_by_category ____________
+tests/conftest.py:117: in test_category
+    category = Category(
+venv/lib/python3.12/site-packages/sqlalchemy/orm/state.py:566: in _initialize_instance
+    with util.safe_reraise():
+venv/lib/python3.12/site-packages/sqlalchemy/util/langhelpers.py:146: in __exit__
+    raise exc_value.with_traceback(exc_tb)
+venv/lib/python3.12/site-packages/sqlalchemy/orm/state.py:564: in _initialize_instance
+    manager.original_init(*mixed[1:], **kwargs)
+venv/lib/python3.12/site-packages/sqlalchemy/orm/decl_base.py:2142: in _declarative_constructor
+    raise TypeError(
+E   TypeError: 'column' is an invalid keyword argument for Category
+_________________ ERROR at setup of test_list_products_search __________________
+tests/conftest.py:117: in test_category
+    category = Category(
+venv/lib/python3.12/site-packages/sqlalchemy/orm/state.py:566: in _initialize_instance
+    with util.safe_reraise():
+venv/lib/python3.12/site-packages/sqlalchemy/util/langhelpers.py:146: in __exit__
+    raise exc_value.with_traceback(exc_tb)
+venv/lib/python3.12/site-packages/sqlalchemy/orm/state.py:564: in _initialize_instance
+    manager.original_init(*mixed[1:], **kwargs)
+venv/lib/python3.12/site-packages/sqlalchemy/orm/decl_base.py:2142: in _declarative_constructor
+    raise TypeError(
+E   TypeError: 'column' is an invalid keyword argument for Category
+______________ ERROR at setup of test_list_products_sort_by_price ______________
+tests/conftest.py:117: in test_category
+    category = Category(
+venv/lib/python3.12/site-packages/sqlalchemy/orm/state.py:566: in _initialize_instance
+    with util.safe_reraise():
+venv/lib/python3.12/site-packages/sqlalchemy/util/langhelpers.py:146: in __exit__
+    raise exc_value.with_traceback(exc_tb)
+venv/lib/python3.12/site-packages/sqlalchemy/orm/state.py:564: in _initialize_instance
+    manager.original_init(*mixed[1:], **kwargs)
+venv/lib/python3.12/site-packages/sqlalchemy/orm/decl_base.py:2142: in _declarative_constructor
+    raise TypeError(
+E   TypeError: 'column' is an invalid keyword argument for Category
+______________ ERROR at setup of test_get_product_detail_success _______________
+tests/conftest.py:117: in test_category
+    category = Category(
+venv/lib/python3.12/site-packages/sqlalchemy/orm/state.py:566: in _initialize_instance
+    with util.safe_reraise():
+venv/lib/python3.12/site-packages/sqlalchemy/util/langhelpers.py:146: in __exit__
+    raise exc_value.with_traceback(exc_tb)
+venv/lib/python3.12/site-packages/sqlalchemy/orm/state.py:564: in _initialize_instance
+    manager.original_init(*mixed[1:], **kwargs)
+venv/lib/python3.12/site-packages/sqlalchemy/orm/decl_base.py:2142: in _declarative_constructor
+    raise TypeError(
+E   TypeError: 'column' is an invalid keyword argument for Category
+_______ ERROR at setup of test_get_product_detail_increments_view_count ________
+tests/conftest.py:117: in test_category
+    category = Category(
+venv/lib/python3.12/site-packages/sqlalchemy/orm/state.py:566: in _initialize_instance
+    with util.safe_reraise():
+venv/lib/python3.12/site-packages/sqlalchemy/util/langhelpers.py:146: in __exit__
+    raise exc_value.with_traceback(exc_tb)
+venv/lib/python3.12/site-packages/sqlalchemy/orm/state.py:564: in _initialize_instance
+    manager.original_init(*mixed[1:], **kwargs)
+venv/lib/python3.12/site-packages/sqlalchemy/orm/decl_base.py:2142: in _declarative_constructor
+    raise TypeError(
+E   TypeError: 'column' is an invalid keyword argument for Category
+______________ ERROR at setup of test_list_products_invalid_page _______________
+tests/conftest.py:117: in test_category
+    category = Category(
+venv/lib/python3.12/site-packages/sqlalchemy/orm/state.py:566: in _initialize_instance
+    with util.safe_reraise():
+venv/lib/python3.12/site-packages/sqlalchemy/util/langhelpers.py:146: in __exit__
+    raise exc_value.with_traceback(exc_tb)
+venv/lib/python3.12/site-packages/sqlalchemy/orm/state.py:564: in _initialize_instance
+    manager.original_init(*mixed[1:], **kwargs)
+venv/lib/python3.12/site-packages/sqlalchemy/orm/decl_base.py:2142: in _declarative_constructor
+    raise TypeError(
+E   TypeError: 'column' is an invalid keyword argument for Category
+_______________ ERROR at setup of test_list_products_large_limit _______________
+tests/conftest.py:117: in test_category
+    category = Category(
+venv/lib/python3.12/site-packages/sqlalchemy/orm/state.py:566: in _initialize_instance
+    with util.safe_reraise():
+venv/lib/python3.12/site-packages/sqlalchemy/util/langhelpers.py:146: in __exit__
+    raise exc_value.with_traceback(exc_tb)
+venv/lib/python3.12/site-packages/sqlalchemy/orm/state.py:564: in _initialize_instance
+    manager.original_init(*mixed[1:], **kwargs)
+venv/lib/python3.12/site-packages/sqlalchemy/orm/decl_base.py:2142: in _declarative_constructor
+    raise TypeError(
+E   TypeError: 'column' is an invalid keyword argument for Category
+=================================== FAILURES ===================================
+________________________ test_register_customer_success ________________________
+tests/test_auth.py:22: in test_register_customer_success
+    response = client.post("/api/v1/auth/register", json=customer_data)
+venv/lib/python3.12/site-packages/starlette/testclient.py:590: in post
+    return super().post(
+venv/lib/python3.12/site-packages/httpx/_client.py:1132: in post
+    return self.request(
+venv/lib/python3.12/site-packages/starlette/testclient.py:465: in request
+    return super().request(
+venv/lib/python3.12/site-packages/httpx/_client.py:814: in request
+    return self.send(request, auth=auth, follow_redirects=follow_redirects)
+venv/lib/python3.12/site-packages/httpx/_client.py:901: in send
+    response = self._send_handling_auth(
+venv/lib/python3.12/site-packages/httpx/_client.py:929: in _send_handling_auth
+    response = self._send_handling_redirects(
+venv/lib/python3.12/site-packages/httpx/_client.py:966: in _send_handling_redirects
+    response = self._send_single_request(request)
+venv/lib/python3.12/site-packages/httpx/_client.py:1002: in _send_single_request
+    response = transport.handle_request(request)
+venv/lib/python3.12/site-packages/starlette/testclient.py:342: in handle_request
+    raise exc
+venv/lib/python3.12/site-packages/starlette/testclient.py:339: in handle_request
+    portal.call(self.app, scope, receive, send)
+venv/lib/python3.12/site-packages/anyio/from_thread.py:277: in call
+    return cast(T_Retval, self.start_task_soon(func, *args).result())
+/usr/lib/python3.12/concurrent/futures/_base.py:456: in result
+    return self.__get_result()
+/usr/lib/python3.12/concurrent/futures/_base.py:401: in __get_result
+    raise self._exception
+venv/lib/python3.12/site-packages/anyio/from_thread.py:217: in _call_func
+    retval = await retval
+venv/lib/python3.12/site-packages/fastapi/applications.py:1106: in __call__
+    await super().__call__(scope, receive, send)
+venv/lib/python3.12/site-packages/starlette/applications.py:122: in __call__
+    await self.middleware_stack(scope, receive, send)
+venv/lib/python3.12/site-packages/starlette/middleware/errors.py:184: in __call__
+    raise exc
+venv/lib/python3.12/site-packages/starlette/middleware/errors.py:162: in __call__
+    await self.app(scope, receive, _send)
+venv/lib/python3.12/site-packages/starlette/middleware/cors.py:83: in __call__
+    await self.app(scope, receive, send)
+venv/lib/python3.12/site-packages/starlette/middleware/exceptions.py:79: in __call__
+    raise exc
+venv/lib/python3.12/site-packages/starlette/middleware/exceptions.py:68: in __call__
+    await self.app(scope, receive, sender)
+venv/lib/python3.12/site-packages/fastapi/middleware/asyncexitstack.py:20: in __call__
+    raise e
+venv/lib/python3.12/site-packages/fastapi/middleware/asyncexitstack.py:17: in __call__
+    await self.app(scope, receive, send)
+venv/lib/python3.12/site-packages/starlette/routing.py:718: in __call__
+    await route.handle(scope, receive, send)
+venv/lib/python3.12/site-packages/starlette/routing.py:276: in handle
+    await self.app(scope, receive, send)
+venv/lib/python3.12/site-packages/starlette/routing.py:66: in app
+    response = await func(request)
+venv/lib/python3.12/site-packages/fastapi/routing.py:274: in app
+    raw_response = await run_endpoint_function(
+venv/lib/python3.12/site-packages/fastapi/routing.py:193: in run_endpoint_function
+    return await run_in_threadpool(dependant.call, **values)
+venv/lib/python3.12/site-packages/starlette/concurrency.py:41: in run_in_threadpool
+    return await anyio.to_thread.run_sync(func, *args)
+venv/lib/python3.12/site-packages/anyio/to_thread.py:33: in run_sync
+    return await get_asynclib().run_sync_in_worker_thread(
+venv/lib/python3.12/site-packages/anyio/_backends/_asyncio.py:877: in run_sync_in_worker_thread
+    return await future
+venv/lib/python3.12/site-packages/anyio/_backends/_asyncio.py:807: in run
+    result = context.run(func, *args)
+app/api/v1/endpoints/auth.py:37: in register_customer
+    return service.register_customer(customer_data.dict())
+app/services/customer_service.py:52: in register_customer
+    hashed_password = get_password_hash(customer_data["password"])
+app/core/security.py:41: in get_password_hash
+    return pwd_context.hash(password)
+venv/lib/python3.12/site-packages/passlib/context.py:2258: in hash
+    return record.hash(secret, **kwds)
+venv/lib/python3.12/site-packages/passlib/utils/handlers.py:779: in hash
+    self.checksum = self._calc_checksum(secret)
+venv/lib/python3.12/site-packages/passlib/handlers/bcrypt.py:591: in _calc_checksum
+    self._stub_requires_backend()
+venv/lib/python3.12/site-packages/passlib/utils/handlers.py:2254: in _stub_requires_backend
+    cls.set_backend()
+venv/lib/python3.12/site-packages/passlib/utils/handlers.py:2156: in set_backend
+    return owner.set_backend(name, dryrun=dryrun)
+venv/lib/python3.12/site-packages/passlib/utils/handlers.py:2163: in set_backend
+    return cls.set_backend(name, dryrun=dryrun)
+venv/lib/python3.12/site-packages/passlib/utils/handlers.py:2188: in set_backend
+    cls._set_backend(name, dryrun)
+venv/lib/python3.12/site-packages/passlib/utils/handlers.py:2311: in _set_backend
+    super(SubclassBackendMixin, cls)._set_backend(name, dryrun)
+venv/lib/python3.12/site-packages/passlib/utils/handlers.py:2224: in _set_backend
+    ok = loader(**kwds)
+venv/lib/python3.12/site-packages/passlib/handlers/bcrypt.py:626: in _load_backend_mixin
+    return mixin_cls._finalize_backend_mixin(name, dryrun)
+venv/lib/python3.12/site-packages/passlib/handlers/bcrypt.py:421: in _finalize_backend_mixin
+    if detect_wrap_bug(IDENT_2A):
+venv/lib/python3.12/site-packages/passlib/handlers/bcrypt.py:380: in detect_wrap_bug
+    if verify(secret, bug_hash):
+venv/lib/python3.12/site-packages/passlib/utils/handlers.py:792: in verify
+    return consteq(self._calc_checksum(secret), chk)
+venv/lib/python3.12/site-packages/passlib/handlers/bcrypt.py:655: in _calc_checksum
+    hash = _bcrypt.hashpw(secret, config)
+E   ValueError: password cannot be longer than 72 bytes, truncate manually if necessary (e.g. my_password[:72])
+------------------------------ Captured log call -------------------------------
+WARNING  passlib.handlers.bcrypt:bcrypt.py:622 (trapped) error reading bcrypt version
+Traceback (most recent call last):
+  File "/home/kavia/workspace/code-generation/opencart-modern-backend-fastapi-307441/venv/lib/python3.12/site-packages/passlib/handlers/bcrypt.py", line 620, in _load_backend_mixin
+    version = _bcrypt.__about__.__version__
+              ^^^^^^^^^^^^^^^^^
+AttributeError: module 'bcrypt' has no attribute '__about__'
+=============================== warnings summary ===============================
+venv/lib/python3.12/site-packages/pydantic/_internal/_config.py:268
+venv/lib/python3.12/site-packages/pydantic/_internal/_config.py:268
+venv/lib/python3.12/site-packages/pydantic/_internal/_config.py:268
+venv/lib/python3.12/site-packages/pydantic/_internal/_config.py:268
+venv/lib/python3.12/site-packages/pydantic/_internal/_config.py:268
+  /home/kavia/workspace/code-generation/opencart-modern-backend-fastapi-307441/venv/lib/python3.12/site-packages/pydantic/_internal/_config.py:268: PydanticDeprecatedSince20: Support for class-based `config` is deprecated, use ConfigDict instead. Deprecated in Pydantic V2.0 to be removed in V3.0. See Pydantic V2 Migration Guide at https://errors.pydantic.dev/2.5/migration/
+    warnings.warn(DEPRECATION_MESSAGE, DeprecationWarning)
+
+app/core/database.py:26
+  /home/kavia/workspace/code-generation/opencart-modern-backend-fastapi-307441/app/core/database.py:26: MovedIn20Warning: The ``declarative_base()`` function is now available as sqlalchemy.orm.declarative_base(). (deprecated since: 2.0) (Background on SQLAlchemy 2.0 at: https://sqlalche.me/e/b8d9)
+    Base = declarative_base()
+
+venv/lib/python3.12/site-packages/passlib/utils/__init__.py:854
+  /home/kavia/workspace/code-generation/opencart-modern-backend-fastapi-307441/venv/lib/python3.12/site-packages/passlib/utils/__init__.py:854: DeprecationWarning: 'crypt' is deprecated and slated for removal in Python 3.13
+    from crypt import crypt as _crypt
+
+tests/test_auth.py::test_register_customer_success
+  /home/kavia/workspace/code-generation/opencart-modern-backend-fastapi-307441/app/api/v1/endpoints/auth.py:37: PydanticDeprecatedSince20: The `dict` method is deprecated; use `model_dump` instead. Deprecated in Pydantic V2.0 to be removed in V3.0. See Pydantic V2 Migration Guide at https://errors.pydantic.dev/2.5/migration/
+    return service.register_customer(customer_data.dict())
+
+tests/test_auth.py::test_register_customer_success
+  /home/kavia/workspace/code-generation/opencart-modern-backend-fastapi-307441/venv/lib/python3.12/site-packages/pydantic/main.py:979: PydanticDeprecatedSince20: The `dict` method is deprecated; use `model_dump` instead. Deprecated in Pydantic V2.0 to be removed in V3.0. See Pydantic V2 Migration Guide at https://errors.pydantic.dev/2.5/migration/
+    warnings.warn('The `dict` method is deprecated; use `model_dump` instead.', DeprecationWarning)
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+=========================== short test summary info ============================
+FAILED tests/test_auth.py::test_register_customer_success - ValueError: passw...
+ERROR tests/test_auth.py::test_register_customer_duplicate_email - ValueError...
+ERROR tests/test_auth.py::test_login_success - ValueError: password cannot be...
+ERROR tests/test_auth.py::test_login_invalid_password - ValueError: password ...
+ERROR tests/test_cart.py::test_get_empty_cart - ValueError: password cannot b...
+ERROR tests/test_cart.py::test_add_to_cart_success - ValueError: password can...
+ERROR tests/test_cart.py::test_add_to_cart_without_auth - TypeError: 'column'...
+ERROR tests/test_cart.py::test_add_to_cart_invalid_product - ValueError: pass...
+ERROR tests/test_cart.py::test_add_to_cart_insufficient_stock - ValueError: p...
+ERROR tests/test_cart.py::test_get_cart_with_items - ValueError: password can...
+ERROR tests/test_cart.py::test_update_cart_item - ValueError: password cannot...
+ERROR tests/test_cart.py::test_remove_cart_item - ValueError: password cannot...
+ERROR tests/test_cart.py::test_add_same_product_twice_increments_quantity - V...
+ERROR tests/test_cart_service.py::test_add_item_to_cart_success - ValueError:...
+ERROR tests/test_cart_service.py::test_add_item_invalid_product - ValueError:...
+ERROR tests/test_cart_service.py::test_add_item_insufficient_stock - ValueErr...
+ERROR tests/test_cart_service.py::test_add_same_item_twice_increments_quantity
+ERROR tests/test_cart_service.py::test_get_empty_cart - ValueError: password ...
+ERROR tests/test_cart_service.py::test_get_cart_with_items - ValueError: pass...
+ERROR tests/test_cart_service.py::test_update_cart_item_quantity - ValueError...
+ERROR tests/test_cart_service.py::test_remove_cart_item - ValueError: passwor...
+ERROR tests/test_cart_service.py::test_clear_cart - ValueError: password cann...
+ERROR tests/test_cart_service.py::test_cart_totals_calculation - ValueError: ...
+ERROR tests/test_product_service.py::test_get_products_with_pagination - Type...
+ERROR tests/test_product_service.py::test_get_products_filter_by_category - T...
+ERROR tests/test_product_service.py::test_get_products_search - TypeError: 'c...
+ERROR tests/test_product_service.py::test_get_products_sort_by_price_asc - Ty...
+ERROR tests/test_product_service.py::test_get_products_sort_by_price_desc - T...
+ERROR tests/test_product_service.py::test_get_product_detail_success - TypeEr...
+ERROR tests/test_product_service.py::test_get_product_detail_increments_views
+ERROR tests/test_products.py::test_list_products_with_data - TypeError: 'colu...
+ERROR tests/test_products.py::test_list_products_second_page - TypeError: 'co...
+ERROR tests/test_products.py::test_list_products_filter_by_category - TypeErr...
+ERROR tests/test_products.py::test_list_products_search - TypeError: 'column'...
+ERROR tests/test_products.py::test_list_products_sort_by_price - TypeError: '...
+ERROR tests/test_products.py::test_get_product_detail_success - TypeError: 'c...
+ERROR tests/test_products.py::test_get_product_detail_increments_view_count
+ERROR tests/test_products.py::test_list_products_invalid_page - TypeError: 'c...
+ERROR tests/test_products.py::test_list_products_large_limit - TypeError: 'co...
+============= 1 failed, 7 passed, 9 warnings, 38 errors in 14.96s ==============

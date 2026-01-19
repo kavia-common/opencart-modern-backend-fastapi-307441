@@ -118,7 +118,7 @@ def test_category(db: Session) -> Category:
         image="",
         parent_id=0,
         top=1,
-        column=1,
+        column_count=1,
         sort_order=0,
         status=1,
         date_added=datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
