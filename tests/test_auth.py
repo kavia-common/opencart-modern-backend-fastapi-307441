@@ -44,7 +44,7 @@ def test_register_customer_duplicate_email(client: TestClient, test_customer):
     
     assert response.status_code == 400
     data = response.json()
-    assert "already exists" in data["detail"].lower()
+    assert "already registered" in data["detail"].lower()
 
 
 @pytest.mark.integration

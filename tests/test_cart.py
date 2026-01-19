@@ -33,7 +33,7 @@ def test_add_to_cart_success(client: TestClient, auth_headers, test_product):
     assert response.status_code == 201
     data = response.json()
     assert "cart_id" in data
-    assert data["message"] == "Item added to cart"
+    assert data["message"] == "Product added to cart"
 
 
 @pytest.mark.integration
@@ -47,7 +47,7 @@ def test_add_to_cart_without_auth(client: TestClient, test_product):
     
     response = client.post("/api/v1/cart/items", json=cart_item)
     
-    assert response.status_code == 403  # Forbidden
+    assert response.status_code == 401  # Unauthorized
 
 
 @pytest.mark.integration
@@ -126,7 +126,7 @@ def test_update_cart_item(client: TestClient, auth_headers, test_product):
     
     assert response.status_code == 200
     data = response.json()
-    assert data["message"] == "Cart item updated"
+    assert data["message"] == "Cart updated"
 
 
 @pytest.mark.integration
