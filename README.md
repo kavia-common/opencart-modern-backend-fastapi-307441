@@ -4,6 +4,8 @@ Modern REST API backend for OpenCart e-commerce platform, migrated from PHP to F
 
 ## Overview
 
+This is a **standalone FastAPI backend** that runs independently using SQLite. It does NOT require the legacy PHP OpenCart container (opencart-307441) to be running.
+
 This is a behavior-preserving migration of OpenCart 3.0.7.4 from PHP to FastAPI (Python), providing:
 
 - RESTful API endpoints for all core e-commerce functionality
@@ -11,6 +13,7 @@ This is a behavior-preserving migration of OpenCart 3.0.7.4 from PHP to FastAPI 
 - SQLite database (compatible with OpenCart schema)
 - Auto-generated OpenAPI/Swagger documentation
 - Modular, maintainable architecture
+- **Independent operation** - no runtime dependencies on PHP services
 
 ## Features
 
@@ -23,6 +26,17 @@ This is a behavior-preserving migration of OpenCart 3.0.7.4 from PHP to FastAPI 
 - **Admin Panel**: Order management and status updates
 
 ## Architecture
+
+### Standalone Operation
+
+The FastAPI backend is completely self-contained:
+- Uses SQLite for data persistence (no external database required)
+- Implements all business logic internally
+- No runtime checks or dependencies on the PHP OpenCart container
+- Can be started, tested, and used independently
+- All environment variables have sane defaults
+
+### Application Structure
 
 The application follows a layered architecture:
 
@@ -58,11 +72,13 @@ source venv/bin/activate  # On Windows: venv\Scripts\activate
 pip install -r requirements.txt
 ```
 
-4. **Configure environment**:
+4. **Configure environment** (optional):
 ```bash
 cp .env.example .env
 # Edit .env and set SECRET_KEY to a random string
 ```
+
+**Note**: The application will run with default configuration even without a `.env` file.
 
 5. **Initialize database**:
 The database will be created automatically on first run. Tables are created via SQLAlchemy on startup.
@@ -80,6 +96,8 @@ uvicorn app.main:app --reload --host 0.0.0.0 --port 8000
 ```bash
 uvicorn app.main:app --host 0.0.0.0 --port 8000 --workers 4
 ```
+
+The server will start immediately without waiting for any external services.
 
 ## API Documentation
 
@@ -138,6 +156,7 @@ The application uses SQLite with a schema compatible with OpenCart's MySQL struc
 - **Location**: `data/opencart.db`
 - **Tables**: Products, Categories, Customers, Orders, Cart, etc.
 - **Migrations**: Managed via Alembic (optional)
+- **Auto-initialization**: Tables created automatically on first startup
 
 ## Testing
 
@@ -152,9 +171,11 @@ pytest
 See `.env.example` for all available configuration options:
 
 - `SECRET_KEY` - JWT signing key (MUST be changed in production!)
-- `DATABASE_URL` - Database connection string
-- `ALLOWED_ORIGINS` - CORS allowed origins
-- `ACCESS_TOKEN_EXPIRE_MINUTES` - JWT expiration time
+- `DATABASE_URL` - Database connection string (default: sqlite:///./data/opencart.db)
+- `ALLOWED_ORIGINS` - CORS allowed origins (default: localhost:3000, localhost:5173)
+- `ACCESS_TOKEN_EXPIRE_MINUTES` - JWT expiration time (default: 60)
+
+**All variables have sane defaults** - the application will run without a `.env` file.
 
 ## Migration from PHP OpenCart
 
@@ -163,6 +184,8 @@ This backend is a 1:1 behavioral migration from OpenCart PHP. It preserves:
 - Business logic and workflows
 - Data structures and relationships
 - API contracts and response formats
+
+**Important**: While this backend was migrated from PHP OpenCart, it is now a standalone service. There is no runtime dependency on the PHP codebase or container.
 
 See `/docs` for detailed migration documentation.
 
@@ -193,6 +216,25 @@ For production deployment:
 4. Use a production ASGI server (e.g., uvicorn with multiple workers)
 5. Set up reverse proxy (nginx/Apache)
 6. Enable HTTPS
+
+## Troubleshooting
+
+### Backend won't start
+
+- **Check Python version**: Requires Python 3.8+
+- **Verify dependencies**: Run `pip install -r requirements.txt`
+- **Check port availability**: Default port 8000 might be in use
+- **Database permissions**: Ensure write access to `data/` directory
+
+### No external dependencies required
+
+This backend is designed to start immediately without:
+- External database servers
+- PHP services
+- Legacy OpenCart containers
+- Configuration from external sources
+
+If the backend refuses to start, check only Python and dependency issues, not external services.
 
 ## License
 
