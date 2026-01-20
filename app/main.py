@@ -371,6 +371,44 @@ async def swagger_ui_alias():
 
 
 # PUBLIC_INTERFACE
+@app.get("/proxy-info", tags=["root"], summary="Proxy Information", include_in_schema=True)
+async def proxy_info(request: Request):
+    """
+    Display proxy and request information for debugging.
+    
+    This endpoint shows all headers and connection details, which is useful
+    for diagnosing proxy configuration issues.
+    
+    Returns:
+        dict: Request details including headers, client info, and proxy headers
+    """
+    # Extract proxy-related headers
+    proxy_headers = {}
+    for header_name in ["x-forwarded-for", "x-forwarded-proto", "x-forwarded-host", 
+                        "x-forwarded-port", "x-real-ip", "forwarded"]:
+        if header_name in request.headers:
+            proxy_headers[header_name] = request.headers[header_name]
+    
+    return {
+        "client": {
+            "host": request.client.host if request.client else None,
+            "port": request.client.port if request.client else None,
+        },
+        "url": {
+            "scheme": request.url.scheme,
+            "netloc": request.url.netloc,
+            "path": request.url.path,
+            "full": str(request.url),
+        },
+        "headers": dict(request.headers),
+        "proxy_headers": proxy_headers,
+        "root_path": request.scope.get("root_path", ""),
+        "app_root_path": settings.ROOT_PATH,
+        "method": request.method,
+    }
+
+
+# PUBLIC_INTERFACE
 @app.get("/ready", tags=["root"], summary="Readiness Check")
 async def readiness_check():
     """

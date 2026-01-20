@@ -83,6 +83,20 @@ cp .env.example .env
 5. **Initialize database**:
 The database will be created automatically on first run. Tables are created via SQLAlchemy on startup.
 
+## Quick Diagnostics
+
+If you're experiencing proxy or connectivity issues, run:
+
+```bash
+# Comprehensive proxy diagnostics (recommended)
+./diagnose_proxy.sh
+
+# Quick verification of endpoints
+./verify_backend.sh
+```
+
+See **PROXY_CONFIGURATION_GUIDE.md** for detailed troubleshooting and platform configuration requirements.
+
 ## Quick Start
 
 For the impatient, here's the fastest way to get started:

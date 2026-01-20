@@ -16,7 +16,13 @@ YELLOW='\033[1;33m'
 NC='\033[0m' # No Color
 
 BACKEND_URL="http://localhost:3003"
-EXTERNAL_URL="https://vscode-internal-34084-beta.beta01.cloud.kavia.ai:3003"
+# Try to get external URL from environment or use default
+EXTERNAL_URL="${BACKEND_URL_EXTERNAL:-https://vscode-internal-34084-beta.beta01.cloud.kavia.ai:3003}"
+
+# If BACKEND_URL is set in .env, use that
+if [ -f ".env" ] && grep -q "^BACKEND_URL=" .env; then
+    EXTERNAL_URL=$(grep "^BACKEND_URL=" .env | cut -d'=' -f2)
+fi
 
 # Test local backend
 echo "1. Testing Local Backend Connectivity"
