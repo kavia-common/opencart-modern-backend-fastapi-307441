@@ -83,6 +83,22 @@ cp .env.example .env
 5. **Initialize database**:
 The database will be created automatically on first run. Tables are created via SQLAlchemy on startup.
 
+## Quick Start
+
+For the impatient, here's the fastest way to get started:
+
+```bash
+# Install dependencies
+pip install -r requirements.txt
+
+# Run the server
+uvicorn app.main:app --reload
+
+# Open your browser to http://localhost:8000/docs
+```
+
+That's it! The database will be created automatically, and you can start exploring the API through Swagger UI.
+
 ## Running the Application
 
 ### Development Mode
@@ -91,21 +107,126 @@ The database will be created automatically on first run. Tables are created via 
 uvicorn app.main:app --reload --host 0.0.0.0 --port 8000
 ```
 
+Options:
+- `--reload` - Auto-reload on code changes
+- `--host 0.0.0.0` - Listen on all interfaces
+- `--port 8000` - Port number
+
 ### Production Mode
 
 ```bash
 uvicorn app.main:app --host 0.0.0.0 --port 8000 --workers 4
 ```
 
+For production, consider:
+- Multiple workers (`--workers 4`)
+- Process manager (systemd, supervisord)
+- Reverse proxy (nginx, Apache)
+- HTTPS/TLS termination
+
+### Using Environment Variables
+
+```bash
+# Set environment variables
+export LOG_LEVEL=DEBUG
+export ENVIRONMENT=production
+
+# Or use .env file
+cp .env.example .env
+# Edit .env with your settings
+
+# Run the server
+uvicorn app.main:app
+```
+
 The server will start immediately without waiting for any external services.
+
+### Accessing the API
+
+Once running:
+1. **Swagger UI**: http://localhost:8000/docs - Interactive API testing
+2. **ReDoc**: http://localhost:8000/redoc - Alternative documentation
+3. **Health check**: http://localhost:8000/health - Verify server is up
+4. **API Info**: http://localhost:8000/ - Get API metadata
 
 ## API Documentation
 
-Once running, access the interactive API documentation:
+Once the server is running, you can access comprehensive interactive API documentation:
 
-- **Swagger UI**: http://localhost:8000/docs
-- **ReDoc**: http://localhost:8000/redoc
-- **OpenAPI JSON**: http://localhost:8000/openapi.json
+### Swagger UI (Recommended)
+**URL**: http://localhost:8000/docs
+
+Swagger UI provides:
+- Interactive API exploration and testing
+- Try out API endpoints directly from the browser
+- View request/response schemas
+- Authentication support (click "Authorize" to add JWT token)
+- Request examples and response codes
+
+### ReDoc
+**URL**: http://localhost:8000/redoc
+
+ReDoc provides:
+- Clean, three-panel documentation layout
+- Detailed schema descriptions
+- Code samples in multiple languages
+- Searchable endpoint reference
+
+### OpenAPI Specification
+**URL**: http://localhost:8000/openapi.json
+
+Download the raw OpenAPI 3.0 specification for:
+- Code generation tools
+- API clients in various languages
+- Integration with third-party tools
+- Custom documentation generation
+
+### Root API Information
+**URL**: http://localhost:8000/
+
+Get API metadata and quick links to all documentation endpoints.
+
+## Monitoring and Health Checks
+
+The API provides several endpoints for monitoring and orchestration:
+
+### Health Check
+**Endpoint**: `GET /health`
+
+Always returns `200 OK` if the application is running. Use this for:
+- Load balancer health checks
+- Basic uptime monitoring
+- Container orchestration liveness probes
+
+**Response**:
+```json
+{
+  "status": "healthy"
+}
+```
+
+### Readiness Check
+**Endpoint**: `GET /ready`
+
+Verifies the application is ready to accept traffic by checking:
+- Database connectivity
+- Critical dependencies
+
+Returns `200 OK` when ready, `503 Service Unavailable` when not ready. Use this for:
+- Kubernetes readiness probes
+- Deployment verification
+- Service orchestration
+
+**Response** (when ready):
+```json
+{
+  "status": "ready",
+  "checks": {
+    "database": "connected",
+    "overall": "ready"
+  }
+}
+```
 
 ## API Endpoints
 
@@ -166,16 +287,79 @@ Run tests with pytest:
 pytest
 ```
 
-## Environment Variables
+## Configuration
+
+### Environment Variables
 
 See `.env.example` for all available configuration options:
 
+#### Application Settings
+- `APP_NAME` - Application name (default: OpenCart Modern API)
+- `APP_VERSION` - API version (default: 1.0.0)
+- `DEBUG` - Enable debug mode (default: False)
+- `ENVIRONMENT` - Environment name: development, staging, production (default: development)
+
+#### Server Settings
+- `HOST` - Server host (default: 0.0.0.0)
+- `PORT` - Server port (default: 8000)
+- `WORKERS` - Number of worker processes (default: 1)
+
+#### Logging
+- `LOG_LEVEL` - Logging level: DEBUG, INFO, WARNING, ERROR, CRITICAL (default: INFO)
+- `LOG_FORMAT` - Log format: text or json (default: text)
+
+#### Security
 - `SECRET_KEY` - JWT signing key (MUST be changed in production!)
-- `DATABASE_URL` - Database connection string (default: sqlite:///./data/opencart.db)
-- `ALLOWED_ORIGINS` - CORS allowed origins (default: localhost:3000, localhost:5173)
+- `ALGORITHM` - JWT algorithm (default: HS256)
 - `ACCESS_TOKEN_EXPIRE_MINUTES` - JWT expiration time (default: 60)
 
+#### Database
+- `DATABASE_URL` - Database connection string (default: sqlite:///./data/opencart.db)
+
+#### CORS
+- `ALLOWED_ORIGINS` - Allowed origins for CORS (default: localhost:3000, localhost:5173)
+  - Can be JSON array: `["http://localhost:3000","http://localhost:5173"]`
+  - Or comma-separated: `http://localhost:3000,http://localhost:5173`
+
+#### API Configuration
+- `API_V1_PREFIX` - API v1 URL prefix (default: /api/v1)
+- `DOCS_URL` - Swagger UI path (default: /docs)
+- `REDOC_URL` - ReDoc path (default: /redoc)
+- `OPENAPI_URL` - OpenAPI spec path (default: /openapi.json)
+
+#### Pagination
+- `DEFAULT_PAGE_SIZE` - Default page size (default: 20)
+- `MAX_PAGE_SIZE` - Maximum page size (default: 100)
+
 **All variables have sane defaults** - the application will run without a `.env` file.
+
+### Logging
+
+The application uses structured logging with configurable levels and formats:
+
+- **Text format** (default): Human-readable console output
+- **JSON format**: Structured logs for log aggregation systems
+
+To enable JSON logging, set `LOG_FORMAT=json` in your `.env` file.
+
+Log levels (from most to least verbose):
+- `DEBUG` - Detailed diagnostic information
+- `INFO` - General informational messages (recommended for production)
+- `WARNING` - Warning messages for potentially harmful situations
+- `ERROR` - Error messages for failures
+- `CRITICAL` - Critical errors that may cause shutdown
+
+Example log output (text format):
+```
+2024-01-15 10:30:45 - app.main - INFO - OpenCart Modern API v1.0.0 starting up
+2024-01-15 10:30:45 - app.main - INFO - Environment: development
+2024-01-15 10:30:45 - app.main - INFO - Documentation available at: /docs
+```
+
+Example log output (JSON format):
+```json
+{"timestamp": "2024-01-15T10:30:45.123456", "level": "INFO", "logger": "app.main", "message": "OpenCart Modern API v1.0.0 starting up"}
+```
 
 ## Migration from PHP OpenCart
 

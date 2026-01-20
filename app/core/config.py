@@ -16,6 +16,16 @@ class Settings(BaseSettings):
     APP_NAME: str = "OpenCart Modern API"
     APP_VERSION: str = "1.0.0"
     DEBUG: bool = False
+    ENVIRONMENT: str = "development"  # development, staging, production
+    
+    # Server
+    HOST: str = "0.0.0.0"
+    PORT: int = 8000
+    WORKERS: int = 1
+    
+    # Logging
+    LOG_LEVEL: str = "INFO"  # DEBUG, INFO, WARNING, ERROR, CRITICAL
+    LOG_FORMAT: str = "text"  # text or json
     
     # Database
     DATABASE_URL: str = "sqlite:///./data/opencart.db"
@@ -32,6 +42,12 @@ class Settings(BaseSettings):
     # Pagination
     DEFAULT_PAGE_SIZE: int = 20
     MAX_PAGE_SIZE: int = 100
+    
+    # API Configuration
+    API_V1_PREFIX: str = "/api/v1"
+    DOCS_URL: str = "/docs"
+    REDOC_URL: str = "/redoc"
+    OPENAPI_URL: str = "/openapi.json"
     
     @field_validator('ALLOWED_ORIGINS', mode='before')
     @classmethod
