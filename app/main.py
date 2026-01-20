@@ -8,6 +8,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse, RedirectResponse
 from sqlalchemy import text
 from sqlalchemy.exc import SQLAlchemyError
+import time
 
 from app.api.v1.router import api_router
 from app.core.config import settings
@@ -40,14 +41,16 @@ def create_application() -> FastAPI:
     - CORS middleware
     - API routes
     - Global exception handlers
+    - Proxy-aware configuration
     
     Returns:
         FastAPI: Configured application instance
     """
-    app = FastAPI(
-        title=settings.APP_NAME,
-        version=settings.APP_VERSION,
-        description="""
+    # Support for proxy deployments - set root_path if configured
+    app_kwargs = {
+        "title": settings.APP_NAME,
+        "version": settings.APP_VERSION,
+        "description": """
         ## Modern REST API for OpenCart E-commerce Platform
         
         This API provides comprehensive e-commerce functionality including:
@@ -69,10 +72,10 @@ def create_application() -> FastAPI:
         ### Support
         For questions or issues, refer to the API documentation or contact support.
         """,
-        docs_url=settings.DOCS_URL,
-        redoc_url=settings.REDOC_URL,
-        openapi_url=settings.OPENAPI_URL,
-        openapi_tags=[
+        "docs_url": settings.DOCS_URL,
+        "redoc_url": settings.REDOC_URL,
+        "openapi_url": settings.OPENAPI_URL,
+        "openapi_tags": [
             {
                 "name": "root",
                 "description": "Root endpoints for API information and health checks"
@@ -110,17 +113,52 @@ def create_application() -> FastAPI:
                 "description": "Administrative operations. Manage orders and system configuration. Requires admin role."
             },
         ],
-        contact={
+        "contact": {
             "name": "OpenCart Modern API Support",
             "url": "https://github.com/opencart/opencart",
         },
-        license_info={
+        "license_info": {
             "name": "GPL v3",
             "url": "https://www.gnu.org/licenses/gpl-3.0.en.html",
         },
-    )
+    }
+    
+    # Add root_path if configured (for proxy deployments)
+    if settings.ROOT_PATH:
+        app_kwargs["root_path"] = settings.ROOT_PATH
+        logger.info(f"Application configured with root_path: {settings.ROOT_PATH}")
+    
+    app = FastAPI(**app_kwargs)
     
     logger.info(f"Initializing {settings.APP_NAME} v{settings.APP_VERSION}")
+    
+    # Add request logging middleware for debugging proxy issues
+    @app.middleware("http")
+    async def log_requests(request: Request, call_next):
+        """
+        Log all incoming requests for debugging and monitoring.
+        Helps diagnose proxy and routing issues.
+        """
+        start_time = time.time()
+        
+        # Log request details
+        logger.info(
+            f"Request: {request.method} {request.url.path} "
+            f"from {request.client.host if request.client else 'unknown'} "
+            f"| Headers: {dict(request.headers)}"
+        )
+        
+        # Process request
+        response = await call_next(request)
+        
+        # Log response
+        process_time = time.time() - start_time
+        logger.info(
+            f"Response: {response.status_code} for {request.method} {request.url.path} "
+            f"| Time: {process_time:.3f}s"
+        )
+        
+        return response
     
     # Configure CORS
     app.add_middleware(
@@ -232,7 +270,9 @@ async def startup_event():
     logger.info(f"{settings.APP_NAME} v{settings.APP_VERSION} starting up")
     logger.info(f"Environment: {settings.ENVIRONMENT}")
     logger.info(f"Debug mode: {settings.DEBUG}")
+    logger.info(f"Host: {settings.HOST}:{settings.PORT}")
     logger.info(f"Documentation available at: {settings.DOCS_URL}")
+    logger.info(f"Root path: {settings.ROOT_PATH if settings.ROOT_PATH else '(not set)'}")
 
 
 @app.on_event("shutdown")
@@ -265,9 +305,25 @@ async def root():
         "endpoints": {
             "health": "/health",
             "ready": "/ready",
+            "ping": "/ping",
             "api": settings.API_V1_PREFIX
         }
     }
+
+
+# PUBLIC_INTERFACE
+@app.get("/ping", tags=["root"], summary="Simple Ping")
+async def ping():
+    """
+    Simple ping endpoint for basic connectivity tests.
+    
+    This is the most minimal endpoint for testing if the service is reachable.
+    Useful for debugging proxy and network configurations.
+    
+    Returns:
+        dict: Simple pong response
+    """
+    return {"ping": "pong"}
 
 
 # PUBLIC_INTERFACE

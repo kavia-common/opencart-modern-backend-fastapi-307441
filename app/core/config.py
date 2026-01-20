@@ -49,6 +49,10 @@ class Settings(BaseSettings):
     REDOC_URL: str = "/redoc"
     OPENAPI_URL: str = "/openapi.json"
     
+    # Proxy Configuration (for deployments behind reverse proxy)
+    ROOT_PATH: str = ""  # e.g., "/api" if app is mounted at a subpath
+    FORWARDED_ALLOW_IPS: str = "*"  # Trust proxy headers from these IPs
+    
     @field_validator('ALLOWED_ORIGINS', mode='before')
     @classmethod
     def parse_allowed_origins(cls, v):
