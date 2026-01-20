@@ -2,16 +2,17 @@
 FastAPI Application Entry Point
 OpenCart Modern Backend - FastAPI Migration
 """
-from fastapi import FastAPI, Request, status, HTTPException
-from fastapi.responses import JSONResponse
+from fastapi import FastAPI, HTTPException, Request, status
 from fastapi.exceptions import RequestValidationError
 from fastapi.middleware.cors import CORSMiddleware
-from app.core.config import settings
-from app.core.database import engine, Base
-from app.core.logging import setup_logging, get_logger
-from app.api.v1.router import api_router
+from fastapi.responses import JSONResponse
 from sqlalchemy import text
 from sqlalchemy.exc import SQLAlchemyError
+
+from app.api.v1.router import api_router
+from app.core.config import settings
+from app.core.database import Base, engine
+from app.core.logging import get_logger, setup_logging
 
 # Setup logging
 setup_logging(
