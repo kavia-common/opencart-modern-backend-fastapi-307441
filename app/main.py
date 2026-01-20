@@ -5,7 +5,7 @@ OpenCart Modern Backend - FastAPI Migration
 from fastapi import FastAPI, HTTPException, Request, status
 from fastapi.exceptions import RequestValidationError
 from fastapi.middleware.cors import CORSMiddleware
-from fastapi.responses import JSONResponse
+from fastapi.responses import JSONResponse, RedirectResponse
 from sqlalchemy import text
 from sqlalchemy.exc import SQLAlchemyError
 
@@ -283,6 +283,35 @@ async def health_check():
         dict: Health status
     """
     return {"status": "healthy"}
+
+
+# PUBLIC_INTERFACE
+@app.get("/docs", include_in_schema=False)
+async def swagger_ui_alias():
+    """
+    Provide a stable alias for Swagger UI at `/docs`.
+
+    Some deployment environments override `DOCS_URL` or mount the app under a
+    prefix; this explicit route ensures that `/docs` behaves predictably by
+    redirecting to the configured docs URL when enabled.
+
+    Returns:
+        RedirectResponse: Redirects to the configured Swagger UI URL.
+
+    Raises:
+        HTTPException: If documentation endpoints are disabled.
+    """
+    if not settings.DOCS_URL:
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND,
+            detail="Swagger UI is disabled (DOCS_URL is empty or None).",
+        )
+
+    # Avoid redirect loops if DOCS_URL is already "/docs"
+    if settings.DOCS_URL == "/docs":
+        return RedirectResponse(url="/docs/", status_code=status.HTTP_307_TEMPORARY_REDIRECT)
+
+    return RedirectResponse(url=settings.DOCS_URL, status_code=status.HTTP_307_TEMPORARY_REDIRECT)
 
 
 # PUBLIC_INTERFACE
